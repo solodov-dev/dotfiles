@@ -1,4 +1,4 @@
-#My dotfiles
+# My dotfiles
 ## Dotfiles for bash, vim, zsh etc.
 
 Usage:

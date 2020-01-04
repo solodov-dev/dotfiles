@@ -28,14 +28,15 @@ set splitright
 "---------------Search--------------"
 set hlsearch
 set incsearch
-nmap <F3> :set hlsearch!<CR>
+
 "--------------Mappings-------------"
 "Edit vimrc file"
 nmap <Leader>ev :tabedit $MYVIMRC<cr> 
-"Remove highlight search"
-nmap <Leader><space> :nohlsearch<cr>
 "Toggle Nerd Tree"
 nmap <C-b> :NERDTreeToggle<cr>
+"Toggle highlight search"
+nmap <F3> :set hlsearch!<cr>
+
 "--------------Auto-Commands--------"
 "Automatically source the Vimrc file on save"
 augroup autosourcing

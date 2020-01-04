@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'vimwiki/vimwiki'
 Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.com'
 
 call vundle#end()
 filetype plugin indent on

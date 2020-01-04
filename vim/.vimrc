@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'vimwiki/vimwiki'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.com'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -28,7 +28,7 @@ set splitright
 "---------------Search--------------"
 set hlsearch
 set incsearch
-
+nmap <F3> :set hlsearch!<CR>
 "--------------Mappings-------------"
 "Edit vimrc file"
 nmap <Leader>ev :tabedit $MYVIMRC<cr> 

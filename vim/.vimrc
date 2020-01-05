@@ -1,6 +1,8 @@
 "-------------------Before installation-----------------
 "Before installing vim and all the plugins:
-"1. Install Vundle manager: 
+"1. Install Vim-Plug manager: 
+" 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "2. Install fzf: Fuzzy finder for shell
 "3. Install Ag(Silver searcher): A code searching tool
 "-------------------------------------------------------

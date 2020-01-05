@@ -8,7 +8,7 @@ export ZSH="/home/solodov/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="wezm"
+ZSH_THEME="agnoster"
 
 #NPM
 npm set prefix ~/.npm
@@ -77,7 +77,6 @@ PATH="./node_modules/.bin:$PATH"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-setfont ter-p18n
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -106,3 +105,5 @@ setfont ter-p18n
 #source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

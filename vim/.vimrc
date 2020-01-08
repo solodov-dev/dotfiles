@@ -27,8 +27,8 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-json', 
   \ 'coc-snippets', 
-  \ 'coc-pairs', 
   \ 'coc-tsserver', 
+  \ 'coc-pairs', 
   \ 'coc-python', 
   \ 'coc-eslint', 
   \ 'coc-tslint', 
@@ -74,14 +74,12 @@ set incsearch
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 " Toggle higlight search
 nmap <F3> :set hlsearch!<cr>		 	
-" Close tab
-nmap <C-w> :tabc<cr>			 	
 " File explorer
 nmap ge :CocCommand explorer<CR>
 
 "-----------FZF Mappings
 " Search files (Ctrl-p)
-nmap <C-p> :Files<cr>				
+nmap <C-p> :GFiles<cr>				
 " Find symbol in current file
 nmap <C-o> :BLines<cr>				
 " Find symbols in files
@@ -101,7 +99,8 @@ inoremap <silent><expr> <Tab>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "Choose the completion with CR
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
+ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 "Coc prettier command
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "--------------Auto-Commands--------

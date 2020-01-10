@@ -10,5 +10,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 # create folders for dotfiles
 mkdir -p .vim .config/coc/ultisnips
 
+
 # stow dotfiles
 stow * 

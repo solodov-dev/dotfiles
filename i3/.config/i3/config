@@ -193,4 +193,4 @@ hide_edge_borders both
 exec_always feh --bg-scale $HOME/Pictures/wallpaper.*
 # Launch polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-# exec_always ~/.config/i3/i3scripts/autoname_workspaces.py &
+new_window pixel 0

@@ -270,7 +270,7 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume =  %percentage%%
+label-volume =  
 label-volume-foreground = ${root.foreground}
 
 label-muted = 🔇 muted

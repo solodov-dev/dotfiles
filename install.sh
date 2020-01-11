@@ -1,5 +1,5 @@
 # install packages
-sudo pacman -S git gvim ttf-fira-code nodejs npm firefox zsh 
+sudo pacman -S git gvim ttf-fira-code nodejs npm firefox zsh polybar
 
 # install ohmyzsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

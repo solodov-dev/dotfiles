@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'			"Statusbar
 Plug 'tpope/vim-surround'
-Plug 'altercation/vim-colors-solarized'		"Theme
+Plug 'dracula/vim'		"Theme
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
@@ -28,10 +28,10 @@ let g:coc_global_extensions = [
   \ 'coc-json', 
   \ 'coc-snippets', 
   \ 'coc-tsserver', 
+\ 'coc-eslint',
+\ 'coc-tslint',
   \ 'coc-pairs', 
   \ 'coc-python', 
-  \ 'coc-eslint', 
-  \ 'coc-tslint', 
   \ 'coc-sh', 
   \ 'coc-emmet', 
   \ 'coc-prettier', 
@@ -46,7 +46,6 @@ filetype plugin indent on
 "---------------Visuals-------------
 set number					"Line numbers
 syntax enable					"Syntax Highlighting
-colorscheme solarized				"Default Colorscheme
 set background=dark
 set laststatus=2				"Show lightline statusbar
 set noshowmode					"Dont show the default mode information

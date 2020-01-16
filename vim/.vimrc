@@ -34,6 +34,7 @@ let g:coc_global_extensions = [
   \ 'coc-python', 
   \ 'coc-sh', 
   \ 'coc-emmet', 
+  \ 'coc-webpack', 
   \ 'coc-prettier', 
   \ 'coc-html', 
   \ 'coc-vetur', 

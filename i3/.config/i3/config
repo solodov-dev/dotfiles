@@ -42,6 +42,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+# start a terminal in the same working directory (requires xcwd to work. Look up on github for installation)
+bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`"
 
 # kill focused window
 bindsym $mod+Shift+q kill

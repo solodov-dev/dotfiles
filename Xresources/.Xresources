@@ -1,5 +1,9 @@
 URxvt.font: xft:firacode:size=10
 URxvt.scrollBar: false
+! Cursor
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: true
+URxvt.cursorColor: #BD93F9
 
 ! Dracula Xresources palette
 *.foreground: #F8F8F2
@@ -20,3 +24,8 @@ URxvt.scrollBar: false
 *.color14:    #9AEDFE
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
+
+! Extensions
+URxvt.perl-ext-common: default,matcher,font-size
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1

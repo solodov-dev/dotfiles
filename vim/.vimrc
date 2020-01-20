@@ -8,6 +8,7 @@
 "-------------------------------------------------------
 set nocompatible
 let mapleader=','
+set backupcopy=yes                "This setting is for webpack dev server
 
 "---------------Vundle-------------"
 filetype off
@@ -15,10 +16,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'			"Statusbar
 Plug 'tpope/vim-surround'
-Plug 'dracula/vim'		"Theme
+Plug 'dracula/vim'		            "Theme
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'sheerun/vim-polyglot'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -28,11 +30,12 @@ let g:coc_global_extensions = [
   \ 'coc-json', 
   \ 'coc-snippets', 
   \ 'coc-tsserver', 
-\ 'coc-eslint',
-\ 'coc-tslint',
+  \ 'coc-eslint',
+  \ 'coc-tslint',
   \ 'coc-pairs', 
   \ 'coc-python', 
   \ 'coc-sh', 
+  \ 'coc-explorer',
   \ 'coc-emmet', 
   \ 'coc-webpack', 
   \ 'coc-prettier', 
@@ -60,9 +63,6 @@ set tabstop=2
 set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
-"---------------Splits--------------
-set splitbelow
-set splitright
 
 "---------------Search--------------
 set hlsearch
@@ -76,6 +76,10 @@ nmap <Leader>ev :tabedit $MYVIMRC<cr>
 nmap <F3> :set hlsearch!<cr>		 	
 " File explorer
 nmap ge :CocCommand explorer<CR>
+" Save file
+nmap <Leader>w :w<cr>
+" Quit
+nmap <Leader>q :q<cr>
 
 "-----------FZF Mappings
 " Search files (Ctrl-p)

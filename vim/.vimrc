@@ -72,6 +72,8 @@ set incsearch
 "--------------Global
 " Edit vimrc file
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
+" Edit snippets for current file
+nmap <Leader>es :tabedit :CocCommand snippets.editSnippets<cr> 
 " Toggle higlight search
 nmap <F3> :set hlsearch!<cr>		 	
 " File explorer

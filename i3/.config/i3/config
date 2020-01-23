@@ -42,11 +42,12 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+
 # start a terminal in the same working directory (requires xcwd to work. Look up on github for installation)
 bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`"
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -b
@@ -183,16 +184,18 @@ set $bg-color 	         #bd93f9
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color     #50fa7b
+set $urgent-bg-color     #ffb86c
+set $urgent-green-color  #50fa7b
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+client.focused          $bg-color           $bg-color          $text-color          #50fa7b
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #50fa7b
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #50fa7b
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #50fa7b
 
 # Set wallpaper on load
 exec_always feh --bg-scale $HOME/Pictures/wallpaper.*
 # Launch polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# Set keyboard layout
 exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle"

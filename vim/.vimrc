@@ -35,7 +35,6 @@ let g:coc_global_extensions = [
   \ 'coc-pairs', 
   \ 'coc-python', 
   \ 'coc-sh', 
-  \ 'coc-explorer',
   \ 'coc-emmet', 
   \ 'coc-webpack', 
   \ 'coc-prettier', 
@@ -48,14 +47,14 @@ call plug#end()
 filetype plugin indent on
 
 "---------------Visuals-------------
-set number					"Line numbers
-syntax enable					"Syntax Highlighting
+set number					    "Line numbers
+syntax enable					  "Syntax Highlighting
 set background=dark
 set laststatus=2				"Show lightline statusbar
 set noshowmode					"Dont show the default mode information
 let g:lightline = {				
 	\ 'colorscheme': 'wombat',
-      	\ }					"Statusbar theme
+      	\ }					    "Statusbar theme
 " On pressing tab, insert 2 spaces
 set expandtab
 " show existing tab with 2 spaces width
@@ -63,6 +62,12 @@ set tabstop=2
 set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
+"--------------netrw style
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 25
+let g:netrw_altv = 1
 
 "---------------Search--------------
 set hlsearch
@@ -73,11 +78,11 @@ set incsearch
 " Edit vimrc file
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 " Edit snippets for current file
-nmap <Leader>es :tabedit :CocCommand snippets.editSnippets<cr> 
+nmap <Leader>es :CocCommand snippets.editSnippets<cr> 
 " Toggle higlight search
 nmap <F3> :set hlsearch!<cr>		 	
 " File explorer
-nmap ge :CocCommand explorer<CR>
+nmap <C-e> :Lexplore<CR>
 " Save file
 nmap <Leader>w :w<cr>
 " Quit

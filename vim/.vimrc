@@ -28,8 +28,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-json', 
-  \ 'coc-snippets', 
   \ 'coc-tsserver', 
+  \ 'coc-snippets', 
   \ 'coc-eslint',
   \ 'coc-tslint',
   \ 'coc-pairs', 

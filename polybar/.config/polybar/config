@@ -1,4 +1,3 @@
-
 ;==========================================================
 ;
 ;
@@ -81,6 +80,7 @@ cursor-scroll = ns-resize
 [module/xwindow]
 type = internal/xwindow
 label = %title%
+label-maxlen = 80
 label-foreground = ${colors.pink}
 label-padding = 3
 

@@ -16,13 +16,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'			"Statusbar
 Plug 'tpope/vim-surround'
-Plug 'dracula/vim'		            "Theme
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ap/vim-css-color'
 
 "Coc extensions
 let g:coc_global_extensions = [
@@ -49,7 +49,10 @@ filetype plugin indent on
 "---------------Visuals-------------
 set number					    "Line numbers
 syntax enable					  "Syntax Highlighting
-set background=dark
+colo ron
+"Gray out comments
+highlight comment ctermfg=grey 
+highlight LineNr ctermfg=blue
 set laststatus=2				"Show lightline statusbar
 set noshowmode					"Dont show the default mode information
 let g:lightline = {				
@@ -62,6 +65,7 @@ set tabstop=2
 set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
+
 "--------------netrw style
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
@@ -111,11 +115,86 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "Choose the completion with CR
  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 "Coc prettier command
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "--------------Auto-Commands--------
-augroup autosourcing				"Automatically source the Vimrc file on save
+"Automatically source the Vimrc file on save
+augroup autosourcing
 	autocmd!
 	autocmd BufWritePost .vimrc source %
 augroup END
+"Automatically compile .tex files on save
+augroup autocompiletex
+  autocmd!
+  autocmd BufWritePost *.tex :!pdflatex % 
+augroup END
+"---------------Mapping for russian keyboard
+map ё `
+map й q
+map ц w
+map у e
+map к r
+map е t
+map н y
+map г u
+map ш i
+map щ o
+map з p
+map х [
+map ъ ]
+map ф a
+map ы s
+map в d
+map а f
+map п g
+map р h
+map о j
+map л k
+map д l
+map ж ;
+map э '
+map я z
+map ч x
+map с c
+map м v
+map и b
+map т n
+map ь m
+map б ,
+map ю .
+map . /
+
+map Ё ~
+map Й Q
+map Ц W
+map У E
+map К R
+map Е T
+map Н Y
+map Г U
+map Ш I
+map Щ O
+map З P
+map Х {
+map Ъ }
+map Ф A
+map Ы S
+map В D
+map А F
+map П G
+map Р H
+map О J
+map Л K
+map Д L
+map Ж :
+map Э "
+map Я Z
+map Ч X
+map С C
+map М V
+map И B
+map Т N
+map Ь M
+map Б <
+map Ю >
+map , ?

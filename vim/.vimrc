@@ -49,6 +49,7 @@ filetype plugin indent on
 "---------------Visuals-------------
 set number					    "Line numbers
 syntax enable					  "Syntax Highlighting
+set autoindent
 colo ron
 "Gray out comments
 highlight comment ctermfg=grey 
@@ -162,7 +163,6 @@ map т n
 map ь m
 map б ,
 map ю .
-map . /
 
 map Ё ~
 map Й Q

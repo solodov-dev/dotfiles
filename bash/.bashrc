@@ -1,3 +1,4 @@
+export PATH=~/bin:"$PATH"
 alias python=python3.8
 alias todo=todo.sh
 # ~/.bashrc: executed by bash(1) for non-login shells.

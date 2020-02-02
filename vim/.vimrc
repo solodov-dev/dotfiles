@@ -9,6 +9,7 @@
 set nocompatible
 let mapleader=','
 set backupcopy=yes                "This setting is for webpack dev server
+set clipboard=unnamed             "Vim unnamed clipboard to a system clipboard
 
 "---------------Vundle-------------"
 filetype off
@@ -197,4 +198,4 @@ map Т N
 map Ь M
 map Б <
 map Ю >
-map , ?
+

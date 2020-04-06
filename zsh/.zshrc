@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="theunraveler"
+ZSH_THEME="gallois"
 
 #CHECKCHEKCCHECK
 # Set list of themes to pick from when loading at random
@@ -97,5 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias zshconfig="vim ~/.zshrc"
+alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d && REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE" 

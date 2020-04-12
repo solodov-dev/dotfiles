@@ -4,7 +4,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH:/home/solodov/.gem/ruby/2.7.0/bin
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-#
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME

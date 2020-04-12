@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:/home/solodov/.gem/ruby/2.7.0/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -101,4 +101,6 @@ EDITOR='vim'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias zshsource="source ~/.zshrc"
 alias zshconfig="vim ~/.zshrc"
-alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d && REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE" 
+alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d"  
+alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE"
+alias work="cd ~/code/work/lombard/app-web-admin"

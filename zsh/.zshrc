@@ -105,7 +105,7 @@ alias vimconfig="vim ~/.vimrc"
 # git
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d"  
 alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE"
-alias dotupdate="git add . && git commit -m 'Update `date`'"
+alias dotupdate="git add . && git commit -m 'Update `date`' && git push origin master"
 
 # navigation
 alias work="cd ~/code/app-web-site && code -r ."

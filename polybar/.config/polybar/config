@@ -17,13 +17,13 @@
 ;==========================================================
 
 [colors]
-background = #282a36
-background-alt = #6272a4
+background = #282828
+background-alt = #928374
 foreground = #f8f8f2
-purple = #bd93f9
-green = #50fa7b
-pink = #ff79c6
-red = #ff5555
+purple = #d79921
+green = #98971a
+pink = #fb4934
+red = #cc241d
 
 [bar/bar1]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -88,7 +88,7 @@ label-padding = 3
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " > "
+format-prefix = " "
 format-prefix-foreground = ${colors.purple}
 
 label-layout = %layout%
@@ -187,14 +187,14 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " > "
+format-prefix = ""
 format-prefix-foreground = ${colors.purple}
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " > "
+format-prefix = " "
 format-prefix-foreground = ${colors.purple}
 label = %percentage_used%%
 
@@ -218,13 +218,13 @@ ramp-signal-3 = 
 ramp-signal-foreground = ${colors.purple}
 
 [module/eth]
-type = internal/network
-interface = eno1
-interval = 3.0
+;type = internal/network
+;interface = wlp3s0
+;interval = 3.0
 
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.purple}
-label-connected = %local_ip%
+;format-connected-prefix = " "
+;format-connected-prefix-foreground = ${colors.purple}
+;label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -249,7 +249,7 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <ramp-volume> > <label-volume>%
+format-volume = <ramp-volume> <label-volume>%
 format-volume-foreground = ${colors.purple}
 label-volume = %percentage% 
 label-volume-foreground = ${root.foreground}
@@ -272,7 +272,7 @@ format-charging = <animation-charging> <label-charging>
 
 format-discharging = <animation-discharging> <label-discharging>
 
-format-full-prefix = " > "
+format-full-prefix = "  "
 format-full-prefix-foreground = ${colors.purple}
 
 ramp-capacity-0 = 
@@ -280,19 +280,19 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.purple}
 
-animation-charging-0 =  > 
-animation-charging-1 =  > 
-animation-charging-2 =  > 
-animation-charging-3 =  > 
-animation-charging-4 =  > 
+animation-charging-0 =   
+animation-charging-1 =   
+animation-charging-2 =   
+animation-charging-3 =   
+animation-charging-4 =   
 animation-charging-foreground = ${colors.purple}
 animation-charging-framerate = 750
 
-animation-discharging-0 =  >
-animation-discharging-1 =  >
-animation-discharging-2 =  >
-animation-discharging-3 =  >
-animation-discharging-4 =  >
+animation-discharging-0 =  
+animation-discharging-1 =  
+animation-discharging-2 =  
+animation-discharging-3 =  
+animation-discharging-4 =  
 animation-discharging-foreground = ${colors.purple}
 animation-discharging-framerate = 750
 
@@ -301,8 +301,8 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> > <label>
-format-warn = <ramp> > <label-warn>
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
 
 label = %temperature-c%
 label-warn = %temperature-c%

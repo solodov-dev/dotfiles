@@ -101,11 +101,16 @@ alias pac="sudo pacman -S"
 alias zsource="source ~/.zshrc"
 alias zconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
+
+# git
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d"  
 alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE"
+alias dotupdate="git add . && git commit -m 'Update `date`'"
+
+# navigation
 alias work="cd ~/code/app-web-site && code -r ."
-# Functions
 mkcd () {
   mkdir "$1"
   cd "$1"
 }
+

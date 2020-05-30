@@ -61,6 +61,11 @@ exec_always --no-startup-id i3-sensible-terminal -T "Time t0 h@ck!"
 bindsym $mod+t [title="Time t0 h@ck!"] scratchpad show
 for_window [title="Time t0 h@ck!"] move scratchpad
 
+# launch a mail-client instance on startup and keep it hidden
+exec_always --no-startup-id mailspring
+bindsym $mod+m [title="Mailspring"] scratchpad show
+for_window [title="Mailspring"] move scratchpad
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -187,7 +192,8 @@ mode "resize" {
 # for a full size screenshot saved to Pictures
 bindsym Shift+Print exec maim ~/Pictures/$(date +%s).png
 # select an area and copy to clipboard
-bindsym Print exec maim -s | xclip -selection clipboard -t image/png
+bindsym Print exec --no-startup-id ~/scripts/screenshot.sh 
+
 
 default_border pixel 1
 
@@ -200,15 +206,15 @@ set $urgent-green-color  #98971a
 set $indicator           #ffffff
 
 # window colors
-#                       border              background         text                 indicator
+#                       border              background         text                 indicator 
 client.focused          $bg-color           $bg-color          $text-color          $indicator
 client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator
 client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator
 
 # Set wallpaper on load
-exec_always feh --bg-scale $HOME/Documents/wallpaper.*
+exec_always --no-startup-id feh --bg-scale $HOME/Documents/wallpaper.*
 # Launch polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Set keyboard layout, hotkeys for changing layout and default CapsLock to Ctrl key
-exec --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle -option ctrl:nocaps"
+exec_always --no-startup-id "setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle -option ctrl:nocaps"

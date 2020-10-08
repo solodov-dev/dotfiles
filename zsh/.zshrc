@@ -107,8 +107,8 @@ alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|
 alias gupdate="git add . && git commit -m 'Update `date`' && git push origin master"
 
 #alias for pushing / pulling common folder in subtree repo
-gcommon () {
-  git subtree --prefix=src/common "$1" common master
+gsub () {
+  git subtree --prefix=src/common "$1" common "$2"
 }
 
 # navigation
@@ -119,6 +119,4 @@ mkcd () {
   mkdir "$1"
   cd "$1"
 }
-
-
 eval $(thefuck --alias)

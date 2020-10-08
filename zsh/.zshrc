@@ -1,5 +1,4 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:/home/solodov/.gem/ruby/2.7.0/bin
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 # Path to your oh-my-zsh installation.
@@ -123,5 +122,3 @@ mkcd () {
 
 
 eval $(thefuck --alias)
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"

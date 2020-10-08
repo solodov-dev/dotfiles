@@ -41,10 +41,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
 
 # start a terminal in the same working directory (requires xcwd to work. Look up on github for installation)
-bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`"
+bindsym $mod+Shift+Return exec terminator -cd "`xcwd`"
 
 # kill focused window
 bindsym $mod+q kill
@@ -57,7 +57,7 @@ bindsym $mod+d exec dmenu_run -nb '#282828' -nf '#ebdbb2' -sb '#d79921' -sf '#3c
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # launch a terminal instance on startup and keep it as dropdown
-exec_always --no-startup-id i3-sensible-terminal -T "Time t0 h@ck!"
+exec_always --no-startup-id terminator -T "Time t0 h@ck!"
 bindsym $mod+t [title="Time t0 h@ck!"] scratchpad show
 for_window [title="Time t0 h@ck!"] move scratchpad
 

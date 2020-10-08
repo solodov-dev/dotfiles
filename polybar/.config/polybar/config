@@ -171,7 +171,7 @@ label-song-ellipsis = true
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <ramp> > <label> % 
+format = <ramp> <label>% 
 format-foreground = ${colors.purple}
 label = %percentage% 
 label-foreground = ${colors.foreground}

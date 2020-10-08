@@ -119,9 +119,3 @@ mkcd () {
   mkdir "$1"
   cd "$1"
 }
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-eval "$(rbenv init -)"
-
-eval $(thefuck --alias)

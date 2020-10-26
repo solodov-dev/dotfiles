@@ -5,8 +5,6 @@ set path+=**
 set wildmenu			
 set wildignore+=**/node_modules/**
 let mapleader="," 			
-set background=dark
-colorscheme gruvbox
 
 "Remaps 
 nnoremap <leader>v :e $MYVIMRC<cr>	
@@ -52,3 +50,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 call plug#end()
+
+set background=dark
+colorscheme gruvbox

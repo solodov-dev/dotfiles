@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 "Basic
 set number 				
 set hidden 				
@@ -6,12 +8,17 @@ set wildmenu
 set wildignore+=**/node_modules/**
 let mapleader="," 			
 
+>>>>>>> a8eb1a04fc641dc52a2d76a2671d16d7e48560e9
 "Remaps 
+let mapleader="," 			
 nnoremap <leader>v :e $MYVIMRC<cr>	
 nnoremap <leader>w :w<cr>		
 nnoremap <leader>f :find 
 nnoremap <leader>q :bd<cr>
 nnoremap <leader>t :term<cr>
+nnoremap <leader>1 :b1<cr>
+nnoremap <leader>2 :b2<cr>
+nnoremap <leader>3 :b3<cr>
 map <F3> :nohl<cr>			
 nmap <F8> :TagbarToggle<cr>			
 map <C-b> :NERDTreeToggle<cr>
@@ -30,7 +37,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 tnoremap <Esc> <C-\><C-n> :bd!<cr>
 
 "Autocommands
-autocmd! BufWritepost $MYVIMRC source $MYVIMRC
+autocmd! BufWritepost $MYVIMRC source $MYVIMRC "source rc file after update
 
 "Install vim-plug if not found
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -51,5 +58,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 call plug#end()
 
+<<<<<<< HEAD
+"Visual
+set number 				
+set hidden 				
+set path+=**				
+set wildmenu			
+set wildignore+=**/node_modules/**
 set background=dark
+set showtabline=2 "show  powerline buffer name in a tab on top
+set noshowmode    "don't show the default insert/normal mode
+=======
+set background=dark
+>>>>>>> a8eb1a04fc641dc52a2d76a2671d16d7e48560e9
 colorscheme gruvbox

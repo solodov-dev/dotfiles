@@ -13,11 +13,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="gallois"
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -38,17 +33,14 @@ ZSH_THEME="gallois"
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -74,23 +66,8 @@ ZSH_THEME="gallois"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-# User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 EDITOR='vim'
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -100,28 +77,37 @@ EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pac="sudo pacman -S"
 alias zsource="source ~/.zshrc"
 alias zconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 
-# git
+# git aliases
+
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d"  
 alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE"
 alias gupdate="git add . && git commit -m 'Update `date`' && git push origin master"
-
-#alias for pushing / pulling common folder in subtree repo
 gsub () {
   git subtree --prefix=src/common "$1" common "$2"
 }
 
-# navigation
-alias gdoc="cd ~/Documents"
-alias gdown="cd ~/Downloads"
-alias work="cd ~/code/app-web-site && code -r ."
+# navigation aliases
+
+alias godoc="cd ~/Documents"
+alias godown="cd ~/Downloads"
 mkcd () {
   mkdir "$1"
   cd "$1"
 }
 eval $(thefuck --alias)
 source /usr/share/nvm/init-nvm.sh
+
+# files aliases
+alias mklog='cat > $(date +"%Y_%m_%d_%I_%M").md << EOF
+---
+slug: "/log/$(date +"%Y-%m-%d-%I-%M")"
+date: "$(date +"%Y-%m-%d")"
+title: "title"
+tags: "tags"
+---
+EOF
+'

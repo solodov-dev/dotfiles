@@ -1,6 +1,8 @@
 set nocompatible
 let mapleader=','
 set clipboard=unnamed             "Vim unnamed clipboard to a system clipboard
+set termguicolors
+colorscheme desert
 "---------------Visuals-------------
 "Line numbers
 set number					    
@@ -32,7 +34,7 @@ set incsearch
 "--------------Mappings-------------
 "--------------Global
 " Edit vimrc file
-nmap <Leader>ev :tabedit $MYVIMRC<cr>
+nmap <Leader>v :tabedit $MYVIMRC<cr>
 " Toggle higlight search
 nmap <F3> :set hlsearch!<cr>		 	
 " File explorer

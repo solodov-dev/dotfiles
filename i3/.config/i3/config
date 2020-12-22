@@ -57,14 +57,14 @@ bindsym $mod+d exec dmenu_run -nb '#282828' -nf '#ebdbb2' -sb '#d79921' -sf '#3c
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # launch a terminal instance on startup and keep it as dropdown
-exec_always --no-startup-id terminator -T "Time t0 h@ck!"
-bindsym $mod+t [title="Time t0 h@ck!"] scratchpad show
-for_window [title="Time t0 h@ck!"] move scratchpad
+exec_always --no-startup-id terminator -T 'termin@l'
+for_window [title="termin@l"] floating enable, resize set 1000 500, move scratchpad
+bindsym $mod+t [title="termin@l"] scratchpad show, move position center
 
 # launch a mail-client instance on startup and keep it hidden
 exec_always --no-startup-id mailspring
-bindsym $mod+m [title="Mailspring"] scratchpad show
-for_window [title="Mailspring"] move scratchpad
+for_window [title="^Mailspring"] floating enable, resize set 1000 500, move scratchpad
+bindsym $mod+m [title="^Mailspring"] scratchpad show, move position center
 
 # change focus
 bindsym $mod+h focus left

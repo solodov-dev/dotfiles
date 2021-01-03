@@ -1,5 +1,5 @@
 set nocompatible
-let mapleader=','
+let mapleader=' '
 set clipboard=unnamed "Vim unnamed clipboard to a system clipboard
 set termguicolors
 colorscheme desert

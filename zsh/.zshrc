@@ -82,16 +82,13 @@ EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zsource="source ~/.zshrc"
 alias zconfig="vim ~/.zshrc"
-alias vimconfig="vim ~/.vimrc"
+alias v="vim"
+alias n="nvim"
 
 # git aliases
-
 alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d"  
 alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE"
 alias gupdate="git add . && git commit -m 'Update `date`' && git push origin master"
-gsub () {
-  git subtree --prefix=src/common "$1" common "$2"
-}
 
 # navigation aliases
 

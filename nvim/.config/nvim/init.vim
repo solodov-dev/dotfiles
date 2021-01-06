@@ -16,7 +16,8 @@
 "============================================================="
 "
 " PLUGINS
-" BASIC
+" GLOBALS
+" OPTIONS
 " REMAPS
 " AUTOCOMMANDS
 " COC
@@ -34,34 +35,87 @@ endif
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'alvan/vim-closetag'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'gruvbox-community/gruvbox'
-Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc-eslint'
 Plug 'neoclide/coc-prettier'
-Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-hi Boolean ctermfg=red
 "=============================================================" 
 "                             GLOBALS                         " 
 "============================================================="
+
 " NERDTree replace arrows
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
-set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline\ Nerd\ Font\ Complete:h12
-" Rainbow parenthesis
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+" NertTree highlight filenames
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFolders = 1 
+let g:NERDTreeHighlightFoldersFullName = 1 
+
+" WebdevIcons refresh
+if exists("g:loaded_webdevicons")
+  call webdevicons#refresh()
+endif
+
+" Airline setup
+" Show buffers
+let g:airline#extensions#tabline#enabled=1
+
+" Theme
+let g:airline_theme='deus'
+
+" If no dictionary for powerline symbols - create one
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='⚡'
 
 "Coc extentions
 let g:coc_global_extensions = [
@@ -116,7 +170,7 @@ let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
 "=============================================================" 
-"                           BASIC                             " 
+"                         OPTIONS                             " 
 "============================================================="
 
 " Turn on syntax highlighting
@@ -182,12 +236,14 @@ set tags^=./.git/tags;
 nnoremap <leader>v :e $MYVIMRC<cr>	
 nnoremap <leader>w :w<cr>		
 nnoremap <leader>q :bd<cr>
-nnoremap <leader>f :NERDTreeFind<cr>
 nnoremap <leader>F :Ag 
+nnoremap gt :bn<cr> 
+nnoremap gT :bp<cr> 
 
 nmap <F8> :TagbarToggle<cr>			
 map <F3> :nohl<cr>			
 map <C-b> :NERDTreeToggle<cr>
+nnoremap <C-e> :NERDTreeFind<cr>
 map <C-p> :GFiles<cr>
 
 " Copy to system clipboard
@@ -211,7 +267,6 @@ autocmd! BufWritepost $MYVIMRC source $MYVIMRC
 
 " Don't show signcolumn in a nerdtree window
 autocmd FileType nerdtree setlocal signcolumn=no
-
 
 "=============================================================" 
 "                              COC                            " 

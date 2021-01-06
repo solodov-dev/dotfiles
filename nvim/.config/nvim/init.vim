@@ -236,6 +236,12 @@ set tags^=./.git/tags;
 nnoremap <leader>v :e $MYVIMRC<cr>	
 nnoremap <leader>w :w<cr>		
 nnoremap <leader>q :bd<cr>
+
+" Close other buffers
+nnoremap <leader>oq :%bd\|e#\|bd#<cr>
+
+" Close all buffers
+nnoremap <leader>aq :%bd<cr>
 nnoremap <leader>F :Ag 
 nnoremap gt :bn<cr> 
 nnoremap gT :bp<cr> 

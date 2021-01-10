@@ -35,6 +35,7 @@ endif
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'alvan/vim-closetag'
+Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -50,8 +51,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc-eslint'
-Plug 'neoclide/coc-prettier'
 call plug#end()
 
 "=============================================================" 
@@ -123,7 +122,9 @@ let g:coc_global_extensions = [
 	\'coc-emmet',
 	\'coc-json',
 	\'coc-css',
-	\'coc-git',
+	\'coc-snippets',
+	\'coc-eslint',
+	\'coc-prettier',
 	\]
 
 " If prettier and eslint are present in node_modules folder 
@@ -233,36 +234,46 @@ set tags^=./.git/tags;
 "============================================================="
 
 " Edit vimrc file
-nnoremap <leader>v :e $MYVIMRC<cr>	
-nnoremap <leader>w :w<cr>		
-nnoremap <leader>q :bd<cr>
+nn <leader>v :e $MYVIMRC<cr>	
+nn <leader>w :w<cr>		
+nn <leader>q :bd<cr>
 
 " Close other buffers
-nnoremap <leader>oq :%bd\|e#\|bd#<cr>
+nn <leader>oq :%bd\|e#\|bd#<cr>
 
 " Close all buffers
-nnoremap <leader>aq :%bd<cr>
-nnoremap <leader>F :Ag 
-nnoremap gt :bn<cr> 
-nnoremap gT :bp<cr> 
+nn <leader>aq :%bd<cr>
+nn <leader>F :Ag 
+nn gt :bn<cr> 
+nn gT :bp<cr> 
 
-nmap <F8> :TagbarToggle<cr>			
+" Turn off highlighting
 map <F3> :nohl<cr>			
-map <C-b> :NERDTreeToggle<cr>
-nnoremap <C-e> :NERDTreeFind<cr>
-map <C-p> :GFiles<cr>
+
+" NERDTree toggle
+map <silent> <C-b> :NERDTreeToggle<cr>
+nn  <silent> <C-e> :NERDTreeFind<cr>
+
+" Search files 
+map <silent> <C-p> :GFiles --cached --others --exclude-standard<cr>
+
+" Search in files
+" map <silent> <leader>f :Ag <cr>
+
+" Open git status in a vertical split
+nn <silent> gs :vertical Gstatus<cr>
 
 " Copy to system clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+vn  <leader>y  "+y
+nn  <leader>Y  "+yg_
+nn  <leader>y  "+y
+nn  <leader>yy  "+yy
 
 " Paste from system clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+nn <leader>p "+p
+nn <leader>P "+P
+vn <leader>p "+p
+vn <leader>P "+P
 
 "=============================================================" 
 "                         AUTOCOMMANDS                        " 
@@ -342,7 +353,3 @@ nnoremap <silent> gh :call CocAction('doHover')<CR>
 
 " Show coc diagnostics list
 nnoremap <silent> <leader>d :<C-u>CocList diagnostics<cr>
-
-" Show coc workspace symbols list
-nnoremap <silent> gs :<C-u>CocList -I symbols<cr>
-

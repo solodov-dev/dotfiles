@@ -93,6 +93,9 @@ alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && g
 # navigation aliases
 alias godoc="cd ~/Documents"
 alias godown="cd ~/Downloads"
+
+# functions
+# Create a directory and cd into it
 mkcd () {
   mkdir "$1"
   cd "$1"
@@ -100,13 +103,22 @@ mkcd () {
 eval $(thefuck --alias)
 source /usr/share/nvm/init-nvm.sh
 
-# files aliases
-alias mklog='cat > $(date +"%Y_%m_%d_%I_%M").md << EOF
+# Basic calculator with awk
+c () 
+{ 
+    local in="$(echo " $*" | sed -e 's/\[/(/g' -e 's/\]/)/g')";
+    gawk -M -v PREC=201 -M 'BEGIN {printf("%.60g\n",'"${in-0}"')}' < /dev/null
+}
+
+# Make log file
+ml () {
+cat > $1.md << EOF
 ---
-slug: "/log/$(date +"%Y-%m-%d-%I-%M")"
 date: "$(date +"%Y-%m-%d")"
-title: "title"
-tags: "tags"
+title: 
+tags: []
 ---
 EOF
-'
+}
+
+alias off=poweroff

@@ -265,6 +265,9 @@ nn <silent> <leader>gs :vertical Gstatus<cr>
 nn <silent> <leader>gc :Gcommit<cr>
 nn <leader>gp :Gpush<cr>
 nn <leader>gP :Gpull<cr>
+nn <leader>gd :Gdiffsplit!<CR>
+nn <leader>gf :diffget //2<CR>
+nn <leader>gj :diffget //3<CR>
 
 " Copy to system clipboard
 vn  <leader>y  "+y

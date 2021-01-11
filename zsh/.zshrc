@@ -122,3 +122,4 @@ EOF
 }
 
 alias off=poweroff
+alias python=python3

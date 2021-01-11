@@ -19,6 +19,7 @@
 " GLOBALS
 " OPTIONS
 " REMAPS
+" COMMANDS
 " AUTOCOMMANDS
 " COC
 
@@ -228,7 +229,6 @@ set ignorecase
 set smartcase
 " Include tags from '.git/tags'
 set tags^=./.git/tags;
-
 "=============================================================" 
 "                             REMAPS                          " 
 "============================================================="
@@ -260,8 +260,11 @@ map <silent> <C-p> :GFiles --cached --others --exclude-standard<cr>
 " Search in files
 " map <silent> <leader>f :Ag <cr>
 
-" Open git status in a vertical split
-nn <silent> gs :vertical Gstatus<cr>
+" Git commands
+nn <silent> <leader>gs :vertical Gstatus<cr>
+nn <silent> <leader>gc :Gcommit<cr>
+nn <leader>gp :Gpush<cr>
+nn <leader>gP :Gpull<cr>
 
 " Copy to system clipboard
 vn  <leader>y  "+y
@@ -275,6 +278,10 @@ nn <leader>P "+P
 vn <leader>p "+p
 vn <leader>P "+P
 
+" Open terminal to the right
+nn <leader>t :vs<bar>:terminal<cr>:wincmd L<cr>
+
+
 "=============================================================" 
 "                         AUTOCOMMANDS                        " 
 "============================================================="
@@ -284,6 +291,15 @@ autocmd! BufWritepost $MYVIMRC source $MYVIMRC
 
 " Don't show signcolumn in a nerdtree window
 autocmd FileType nerdtree setlocal signcolumn=no
+
+" Hide numbers in terminal buffer
+autocmd TermOpen * setlocal nonumber norelativenumber
+
+" Exit terminal mode (do not interfere with fzf esc behavior)
+if has("nvim")
+  au TermOpen * tnoremap <Esc> <c-\><c-n>
+  au FileType fzf tunmap <Esc>
+endif
 
 "=============================================================" 
 "                              COC                            " 
@@ -338,6 +354,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>af  <Plug>(coc-fix-current)
+
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')

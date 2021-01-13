@@ -35,6 +35,7 @@ endif
 
 call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
@@ -254,8 +255,11 @@ nn gT :bp<cr>
 map <F3> :nohl<cr>			
 
 " NERDTree toggle
-map <silent> <C-b> :NERDTreeToggle<cr>
+map <silent> <F4> :NERDTreeToggle<cr>
 nn  <silent> <C-e> :NERDTreeFind<cr>
+
+" UndoTree toggle
+nnoremap <F5> :UndotreeToggle<cr>
 
 " Search files 
 map <silent> <C-p> :GFiles --cached --others --exclude-standard<cr>
@@ -299,6 +303,9 @@ autocmd FileType nerdtree setlocal signcolumn=no
 
 " Hide numbers in terminal buffer
 autocmd TermOpen * setlocal nonumber norelativenumber
+
+" Don't insert auto comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Exit terminal mode (do not interfere with fzf esc behavior)
 if has("nvim")

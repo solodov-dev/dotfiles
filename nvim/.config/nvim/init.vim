@@ -61,6 +61,7 @@ call plug#end()
 " NERDTree replace arrows
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeCustomOpenArgs = {'file': {'reuse': 'all', 'where': 'p', 'keepopen': 1, 'stay': 1}}
 
 " NertTree highlight filenames
 let g:NERDTreeFileExtensionHighlightFullName = 1
@@ -183,6 +184,8 @@ set nowrap
 set number
 " Turn on relative line numbers
 set relativenumber 				
+" Mor space for commands
+set cmdheight=2
 " Hide buffer, but don't close it on loosing focus
 set hidden 				
 " Turn on command line completion
@@ -262,7 +265,6 @@ map <silent> <C-p> :GFiles --cached --others --exclude-standard<cr>
 
 " Git commands
 nn <silent> <leader>gs :vertical Gstatus<cr>
-nn <silent> <leader>gc :Gcommit<cr>
 nn <leader>gp :Gpush<cr>
 nn <leader>gP :Gpull<cr>
 nn <leader>gd :Gdiffsplit!<CR>

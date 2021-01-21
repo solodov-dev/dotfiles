@@ -86,10 +86,9 @@ alias v="vim"
 alias n="nvim"
 
 # git aliases
-alias gclean="git branch --merged | egrep -v \"(^\*|master|dev|production)\" | xargs git branch -d"  
-alias gcleanr="REMOTE=origin && git branch -r --merged | egrep -v \"(^\*|master|dev|production)\" | grep $REMOTE | sed \"s/$REMOTE\//:/\" | xargs -n 1 git push $REMOTE"
 alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && git push origin master"
 alias gtree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gprune="git fetch --prune && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
 
 # navigation aliases
 alias godoc="cd ~/Documents"
@@ -100,15 +99,6 @@ alias godown="cd ~/Downloads"
 mkcd () {
   mkdir "$1"
   cd "$1"
-}
-eval $(thefuck --alias)
-source /usr/share/nvm/init-nvm.sh
-
-# Basic calculator with awk
-c () 
-{ 
-    local in="$(echo " $*" | sed -e 's/\[/(/g' -e 's/\]/)/g')";
-    gawk -M -v PREC=201 -M 'BEGIN {printf("%.60g\n",'"${in-0}"')}' < /dev/null
 }
 
 # Make log file
@@ -124,3 +114,4 @@ EOF
 
 alias off=poweroff
 alias python=python3
+source /usr/share/nvm/init-nvm.sh

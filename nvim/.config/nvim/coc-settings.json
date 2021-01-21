@@ -1,6 +1,6 @@
 {
 	"eslint.autoFixOnSave": true,
-	"coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescriptreact", "typescript"],
+	"coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescriptreact", "typescript", "html", "css", "sass", "scss"],
 	"tsserver.formatOnType": true,
 	"coc.preferences.formatOnType":true
 }

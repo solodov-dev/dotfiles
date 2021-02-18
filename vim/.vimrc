@@ -9,6 +9,7 @@ set expandtab
 set autoindent
 set cursorline
 let mapleader=' '
+set showtabline=0
 colorscheme slate
 
 "--------------Globals--------------

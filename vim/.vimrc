@@ -7,6 +7,7 @@ set tabstop=2 softtabstop=2 shiftwidth=2
 set hlsearch incsearch
 set expandtab
 set autoindent
+set cursorline
 let mapleader=' '
 colorscheme slate
 
@@ -16,6 +17,7 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 25
 let g:netrw_altv = 1
+hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=white
 
 "--------------Mappings-------------
 nmap <Leader>v :tabedit $MYVIMRC<cr>

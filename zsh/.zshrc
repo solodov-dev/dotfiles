@@ -113,5 +113,8 @@ EOF
 }
 
 alias off=poweroff
-alias python=python3
+# alias python=python3
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Misc aliases
+alias heroes="cd ~/.wine/drive_c/GOG\ Games/HoMM\ 3\ Complete && wine HD3_Launcher.exe"

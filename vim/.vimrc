@@ -8,6 +8,7 @@ set hlsearch incsearch
 set expandtab
 set autoindent
 let mapleader=' '
+set showtabline=0
 colorscheme slate
 
 "--------------Globals--------------

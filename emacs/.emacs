@@ -3,11 +3,13 @@
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 10)        ; Give some breathing room
-(menu-bar-mode -1)            ; Disable the menu bar
-;; Set up the visible bell
-(setq visible-bell t)
+(menu-bar-mode -1)          ; Disable the menu bar
+(setq visible-bell t)       ; Set up the visible bell
+(when window-system
+  (if (> (x-display-pixel-width) 1600) 
+      (set-frame-font "Fira Code 14" nil t)
+    (set-frame-font "Fira Code 12" nil t)))
 
-(set-face-attribute 'default nil :font "Fira Code" :height 90)
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -94,24 +96,59 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
-
+(defun solo/evil-hook ()
+  (dolist (mode '(custom-mode
+		  eshell-mode
+		  git-rebase-mode
+		  erc-mode
+		  circe-server-mode
+		  circe-chat-mode
+		  circe-query-mode
+		  sauron-mode
+		  term-mode))
+    (add-to-list 'evil-emacs-state-modes mode)))
 (use-package general
-:config
-(general-create-definer solo/leader-keys
-  :keymaps '(normal insert visual emacs)
-  :prefix "SPC"
-  :global-prefix "C-SPC")
+  :config
+  (general-create-definer solo/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+  (solo/leader-keys
+    "t" '(:ignore t :which-key "toggles")))
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+(use-package hydra)
+(defhydra hydra-text-scale (:timeout 4)
+  "scale text"
+  ("j" text-scale-increase "in")
+  ("k" text-scale-decrease "out")
+  ("f" nil "finished" :exit t))
 (solo/leader-keys
- "t" '(:ignore t :which-key "toggles")))
+ "ts" '(hydra-text-scale/body :which-key "scale text"))
 
  
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit by hand, you could metss it up, so be careful.
+ ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(general ivy-rich which-key rainbow-delimiters solarized-theme doom-modeline ivy command-log-mode use-package)))
+   '(hydra evil-collection evil general ivy-rich which-key rainbow-delimiters solarized-theme doom-modeline ivy command-log-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

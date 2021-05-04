@@ -9,7 +9,7 @@
 (when window-system
   (if (> (x-display-pixel-width) 1600) 
       (set-frame-font "Fira Code 14" nil t)
-    (set-frame-font "Fira Code 12" nil t)))
+    (set-frame-font "Fira Code 10" nil t)))
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -170,6 +170,10 @@
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+(solo/leader-keys
+  "g" '(:ignore t :which-key "magit")
+  "gs" '(magit-status :which-key "git status"))
+
 (use-package org)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

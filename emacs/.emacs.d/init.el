@@ -16,7 +16,13 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(defvar solo/default-font-size 140)
+(defun is-large-monitor ()
+  (> (display-pixel-width) 2000))
+
+(defun font-size ()
+  (if (is-large-monitor) 140) 100)
+
+(defvar solo/default-font-size (font-size))
 
 ;; MACOS path problem
 (use-package exec-path-from-shell
@@ -474,3 +480,16 @@
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(lsp-ivy lsp-treemacs lsp-ui company-box company lsp-mode which-key web-mode visual-fill-column use-package typescript-mode spinner solarized-theme rainbow-delimiters prettier-js org-bullets json-mode ivy-rich hydra ht helpful general frame-local forge exec-path-from-shell evil-commentary evil-collection doom-themes doom-modeline counsel-projectile command-log-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

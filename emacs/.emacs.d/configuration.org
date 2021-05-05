@@ -40,7 +40,15 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
 ** Variables
 
 #+begin_src emacs-lisp
-  (defvar solo/default-font-size 140)
+
+  (defun is-large-monitor ()
+    (> (display-pixel-width) 2000))
+
+  (defun font-size ()
+    (if (is-large-monitor) 140) 100)
+
+  (defvar solo/default-font-size (font-size))
+
 #+end_src
 
 ** PATH

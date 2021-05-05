@@ -1,7 +1,9 @@
 ;; Define font size variables
-    (defvar solo/default-font-size 140)
+(defvar solo/default-font-size 140)
 ;; Start fullscreen
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; MACOS path problem
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 ;; Initialize package sources
 (require 'package)
@@ -94,7 +96,8 @@
       "bw" '(save-buffer :which-key "save buffer")
       "be" '(eval-buffer :which-key "evaluate buffer")
       "bs" '(counsel-switch-buffer :which-key "switch buffer")
-      "bq" '(kill-current-buffer :which-key "kill current buffer"))
+      "bq" '(kill-current-buffer :which-key "kill current buffer")
+      "bt" '(treemacs :which-key "treemacs toggle"))
 (solo/leader-keys
   "," '(lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org") :which-key "open config"))
 

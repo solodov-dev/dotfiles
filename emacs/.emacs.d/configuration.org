@@ -6,10 +6,13 @@
 This is the configuration we've been building in the *Emacs From Scratch* series, now written as an Org Mode document.  This file generates [[file:init.el][init.el]] which can be loaded by Emacs at startup.
 
 #+begin_src emacs-lisp
-;; Define font size variables
-    (defvar solo/default-font-size 140)
-;; Start fullscreen
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+  ;; Define font size variables
+  (defvar solo/default-font-size 140)
+  ;; Start fullscreen
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  ;; MACOS path problem
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 #+end_src
 
@@ -138,7 +141,8 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
         "bw" '(save-buffer :which-key "save buffer")
         "be" '(eval-buffer :which-key "evaluate buffer")
         "bs" '(counsel-switch-buffer :which-key "switch buffer")
-        "bq" '(kill-current-buffer :which-key "kill current buffer"))
+        "bq" '(kill-current-buffer :which-key "kill current buffer")
+        "bt" '(treemacs :which-key "treemacs toggle"))
   (solo/leader-keys
     "," '(lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org") :which-key "open config"))
 

@@ -163,8 +163,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     "bw" '(save-buffer :which-key "save buffer")
     "be" '(eval-buffer :which-key "evaluate buffer")
     "bs" '(counsel-switch-buffer :which-key "switch buffer")
-    "bq" '(kill-current-buffer :which-key "kill current buffer")
-    "bt" '(treemacs :which-key "treemacs toggle"))
+    "bq" '(kill-current-buffer :which-key "kill current buffer"))
 
   ;; Search
   (solo/leader-keys
@@ -172,10 +171,11 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     "ff" '(project-find-file :which-key "project-find-file"))
 
   (solo/leader-keys
-  "," '(lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org") :which-key "open config"))
+  "," '((lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org")) :which-key "open config"))
 
   (solo/leader-keys
-    "t"  '(:ignore t :which-key "toggles"))
+    "t"  '(:ignore t :which-key "toggle")
+    "tt" '(treemacs :which-key "toggle treemacs"))
 
 
 #+end_src
@@ -626,8 +626,8 @@ This snippet adds a hook to =org-mode= buffers so that =solo/org-babel-tangle-co
       (lsp-headerline-breadcrumb-mode))
 
   (use-package lsp-mode
-      :commands (lsp lsp-deferred)
-      :hook ((web-mode . lsp-deferred)
+    :commands (lsp lsp-deferred)
+      :hook ((web-mode . solo/lsp-mode-setup)
              (lsp-mode . solo/lsp-mode-setup))
       :init
       (setq lsp-keymap-prefix "C-c l")

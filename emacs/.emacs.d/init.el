@@ -106,8 +106,7 @@
   "bw" '(save-buffer :which-key "save buffer")
   "be" '(eval-buffer :which-key "evaluate buffer")
   "bs" '(counsel-switch-buffer :which-key "switch buffer")
-  "bq" '(kill-current-buffer :which-key "kill current buffer")
-  "bt" '(treemacs :which-key "treemacs toggle"))
+  "bq" '(kill-current-buffer :which-key "kill current buffer"))
 
 ;; Search
 (solo/leader-keys
@@ -115,10 +114,11 @@
   "ff" '(project-find-file :which-key "project-find-file"))
 
 (solo/leader-keys
-"," '(lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org") :which-key "open config"))
+"," '((lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org")) :which-key "open config"))
 
 (solo/leader-keys
-  "t"  '(:ignore t :which-key "toggles"))
+  "t"  '(:ignore t :which-key "toggle")
+  "tt" '(treemacs :which-key "toggle treemacs"))
 
 (use-package command-log-mode)
 
@@ -412,8 +412,8 @@
     (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-    :hook ((web-mode . lsp-deferred)
+  :commands (lsp lsp-deferred)
+    :hook ((web-mode . solo/lsp-mode-setup)
            (lsp-mode . solo/lsp-mode-setup))
     :init
     (setq lsp-keymap-prefix "C-c l")
@@ -480,16 +480,3 @@
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(lsp-ivy lsp-treemacs lsp-ui company-box company lsp-mode which-key web-mode visual-fill-column use-package typescript-mode spinner solarized-theme rainbow-delimiters prettier-js org-bullets json-mode ivy-rich hydra ht helpful general frame-local forge exec-path-from-shell evil-commentary evil-collection doom-themes doom-modeline counsel-projectile command-log-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

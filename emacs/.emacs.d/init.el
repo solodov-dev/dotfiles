@@ -291,30 +291,18 @@
 
   (setq org-capture-templates
     `(("t" "Tasks / Projects")
-      ("tt" "Task" entry (file+olp "~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org" "Inbox")
+      ("tt" "Task" entry (file+olp "~/orgfiles/tasks.org" "Inbox")
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
 
       ("j" "Journal Entries")
       ("jj" "Journal" entry
-           (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           (file+olp+datetree "~/orgfiles/journal.org")
            "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
            ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
            :clock-in :clock-resume
-           :empty-lines 1)
-      ("jm" "Meeting" entry
-           (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
-           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-           :clock-in :clock-resume
-           :empty-lines 1)
-
-      ("w" "Workflows")
-      ("we" "Checking Email" entry (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
-           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
-      ("m" "Metrics Capture")
-      ("mw" "Weight" table-line (file+headline "~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
-       "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
-
+           :empty-lines 1)))
+  (define-key global-map (kbd "C-c t")
+    (lambda () (interactive) (org-capture nil "tt")))
   (define-key global-map (kbd "C-c j")
     (lambda () (interactive) (org-capture nil "jj")))
 
@@ -341,10 +329,17 @@
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
+;; This is needed as of Org 9.2
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun solo/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/Projects/Code/emacs-from-scratch/Emacs.org"))
+                      (expand-file-name "~/.dotfiles/emacs/.emacs.d/configuration.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
@@ -427,16 +422,3 @@
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(lsp-ivy lsp-treemacs company-box which-key visual-fill-column use-package typescript-mode rainbow-delimiters org-bullets lsp-ui ivy-rich hydra helpful general forge evil-commentary evil-collection doom-themes doom-modeline counsel-projectile company command-log-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

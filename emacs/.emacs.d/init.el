@@ -1,10 +1,3 @@
-;; Define font size variables
-(defvar solo/default-font-size 140)
-;; Start fullscreen
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-;; MACOS path problem
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-
 ;; Initialize package sources
 (require 'package)
 
@@ -23,6 +16,17 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(defvar solo/default-font-size 140)
+
+;; MACOS path problem
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
+(setq backup-directory-alist '(("." . "~/.saves")))
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
@@ -34,6 +38,9 @@
 
 ;; Set up the visible bell
 (setq visible-bell t)
+
+;; Start fullscreen
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
@@ -55,51 +62,57 @@
 (set-face-attribute 'variable-pitch nil :font "Roboto" :height solo/default-font-size :weight 'regular)
 
 ;; Make ESC quit prompts
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-  (use-package general
-    :config
-    (general-create-definer solo/leader-keys
-      :keymaps '(normal insert visual emacs)
-      :prefix "SPC"
-      :global-prefix "C-SPC")
+(use-package general
+  :config
+  (general-create-definer solo/leader-keys
+  :keymaps '(normal insert visual emacs)
+  :prefix "SPC"
+  :global-prefix "C-SPC"))
 
-    (solo/leader-keys
-      "t"  '(:ignore t :which-key "toggles")))
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-  (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    (setq evil-want-C-u-scroll t)
-    (setq evil-want-C-i-jump nil)
-    :config
-    (evil-mode 1)
-    (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
-    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+;; Use visual line motions even outside of visual-line-mode buffers
+(evil-global-set-key 'motion "j" 'evil-next-visual-line)
+(evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-    ;; Use visual line motions even outside of visual-line-mode buffers
-    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+(evil-set-initial-state 'messages-buffer-mode 'normal)
+(evil-set-initial-state 'dashboard-mode 'normal))
 
-    (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal))
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init))
-
-  ;; Buffers
-  (solo/leader-keys
-      "b" '(:ignore t :which-key "buffers")
-      "bw" '(save-buffer :which-key "save buffer")
-      "be" '(eval-buffer :which-key "evaluate buffer")
-      "bs" '(counsel-switch-buffer :which-key "switch buffer")
-      "bq" '(kill-current-buffer :which-key "kill current buffer")
-      "bt" '(treemacs :which-key "treemacs toggle"))
+;; Buffers
 (solo/leader-keys
-  "," '(lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org") :which-key "open config"))
+  "b" '(:ignore t :which-key "buffers")
+  "bw" '(save-buffer :which-key "save buffer")
+  "be" '(eval-buffer :which-key "evaluate buffer")
+  "bs" '(counsel-switch-buffer :which-key "switch buffer")
+  "bq" '(kill-current-buffer :which-key "kill current buffer")
+  "bt" '(treemacs :which-key "treemacs toggle"))
+
+;; Search
+(solo/leader-keys
+  "f" '(:ignore t :which-key "find")
+  "ff" '(project-find-file :which-key "project-find-file"))
+
+(solo/leader-keys
+"," '(lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org") :which-key "open config"))
+
+(solo/leader-keys
+  "t"  '(:ignore t :which-key "toggles"))
 
 (use-package command-log-mode)
 
@@ -371,6 +384,10 @@
 ;;(use-package evil-magit
 ;; :after magit)
 
+(solo/leader-keys
+  "g" '(:ignore t :which-key "git")
+  "gs" '(magit-status :which-key "git status"))
+
 ;; NOTE: Make sure to configure a GitHub token before using this package!
 ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
 ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
@@ -381,33 +398,51 @@
 
 (defun solo/lsp-mode-setup ()
     (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+    (setq lsp-log-io nil)
+    (setq lsp-restart)
+    (setq lsp-ui-sideline-show-diagnostics t)
+    (setq lsp-ui-sideline-show-hover t)
+    (setq lsp-ui-sideline-show-code-actions t)
     (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
     :commands (lsp lsp-deferred)
-:hook (lsp-mode . solo/lsp-mode-setup)
+    :hook ((web-mode . lsp-deferred)
+           (lsp-mode . solo/lsp-mode-setup))
     :init
-    (setq lsp-keymap-prefix "SPC l")
+    (setq lsp-keymap-prefix "C-c l")
     :config
     (lsp-enable-which-key-integration t))
 
 (solo/leader-keys
-    "lr" '(lsp-rename :which-key "rename symbol")
-    "ld" '(lsp-find-definition :which-key "find definitions")
-    "lf" '(lsp-find-references :which-key "find references"))
+  "l" '(:ignore t :which-key "lsp")
+  "lr" '(lsp-rename :which-key "rename symbol")
+  "ld" '(lsp-find-definition :which-key "find definitions")
+  "lf" '(lsp-find-references :which-key "find references"))
 
 (use-package typescript-mode
     :mode "\\.ts\\'"
     :hook (typescript-mode . lsp-deferred)
     :config (setq typescript-indent-level 2))
 
+(use-package json-mode
+  :ensure t)
+
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(use-package web-mode
+  :ensure t
+  :mode (("\\.js\\'" . web-mode)
+         ("\\.jsx\\'" .  web-mode)
+         ("\\.ts\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode)
+         ("\\.html\\'" . web-mode))
+  :commands web-mode)
+
 (use-package company
     :after lsp-mode
     :hook (lsp-mode . company-mode)
-    :bind (:map company-active-map
-        ("<tab>" . company-complete-selection))
-    (:map lsp-mode-map
-    ("<tab>" . company-indent-or-complete-common))
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
@@ -422,6 +457,20 @@
     :after lsp)
 
 (use-package lsp-ivy)
+
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+	  (funcall (cdr my-pair)))))
+
+(use-package prettier-js
+  :ensure t)
+(add-hook 'web-mode-hook #'(lambda ()
+                             (enable-minor-mode
+                              '("\\.jsx?\\'" . prettier-js-mode))
+			     (enable-minor-mode
+                              '("\\.tsx?\\'" . prettier-js-mode))))
 
 (use-package evil-commentary
   :init (evil-commentary-mode))

@@ -81,22 +81,22 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package general
-  :config
-  (general-create-definer solo/leader-keys
-  :keymaps '(normal insert visual emacs)
-  :prefix "SPC"
-  :global-prefix "C-SPC"))
+    :config
+    (general-create-definer solo/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC"))
 
 (use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump t)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump t)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
 ;; Use visual line motions even outside of visual-line-mode buffers
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -106,44 +106,59 @@
 (evil-set-initial-state 'dashboard-mode 'normal))
 
 (use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+    :after evil
+    :config
+    (evil-collection-init))
 
 ;; Buffers
 (solo/leader-keys
-  "b" '(:ignore t :which-key "buffers")
-  "bw" '(save-buffer :which-key "save buffer")
-  "be" '(eval-buffer :which-key "evaluate buffer")
-  "bs" '(counsel-switch-buffer :which-key "switch buffer")
-  "bq" '(kill-current-buffer :which-key "kill current buffer"))
+    "b" '(:ignore t :which-key "buffers")
+    "bw" '(save-buffer :which-key "save buffer")
+    "be" '(eval-buffer :which-key "evaluate buffer")
+    "bs" '(counsel-switch-buffer :which-key "switch buffer")
+    "bq" '(kill-current-buffer :which-key "kill current buffer"))
 
 ;; Find
 (solo/leader-keys
-  "f" '(:ignore t :which-key "find")
-  "fd" '(xref-find-definitions-other-window :which-key "find definitions")
-  "fr" '(lsp-ui-peek-find-references :which-key "find references")
-  "fD" '(lsp-ui-doc-glance :which-key "find documentation")
-  "ff" '(projectile-find-file :which-key "project-find-file")
-  "fp" '(projectile-switch-project :which-key "project-find-file"))
+    "f" '(:ignore t :which-key "find")
+    "fd" '(xref-find-definitions-other-window :which-key "find definitions")
+    "fr" '(lsp-ui-peek-find-references :which-key "find references")
+    "ff" '(projectile-find-file :which-key "project-find-file")
+    "fp" '(projectile-switch-project :which-key "project-find-file"))
 
 (solo/leader-keys
 "," '((lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org")) :which-key "open config"))
 
+;; Toggle
 (solo/leader-keys
-  "t"  '(:ignore t :which-key "toggle")
-  "te" '(flymake-show-diagnostics-buffer :which-key "toggle errors")
-  "tE" '(lsp-treemacs-errors-list :which-key "toggle global errors")
-  "tt" '(treemacs :which-key "toggle treemacs"))
+    "t"  '(:ignore t :which-key "toggle")
+    "te" '(flymake-show-diagnostics-buffer :which-key "toggle errors")
+    "tE" '(lsp-treemacs-errors-list :which-key "toggle global errors")
+    "td" '(lsp-ui-doc-glance :which-key "toggle documentation")
+    "tt" '(treemacs :which-key "toggle treemacs"))
+
+;; Make
+(solo/leader-keys
+    "m"  '(:ignore t :which-key "make")
+    "mf" '(make-empty-file :whick-key "make empty file")
+    "md" '(make-directory :which-key "make directory"))
+
+;; Delete
+(solo/leader-keys
+    "d"  '(:ignore t :which-key "delete")
+    "df" '(delete-file :whick-key "delete file")
+    "dd" '(delete-directory :which-key "delete directory"))
 
 (use-package command-log-mode)
 
 (use-package doom-themes
-  :config
-  (load-theme 'doom-solarized-light t)
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config)
-  (doom-themes-treemacs-config))
+:custom
+  (doom-themes-treemacs-theme "doom-colors")
+    :config
+    (load-theme 'doom-solarized-light t)
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config)
+    (doom-themes-treemacs-config))
 
 (use-package all-the-icons)
 
@@ -393,7 +408,7 @@
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/code")
-    (setq projectile-project-search-path '("~/code")))
+    (setq projectile-project-search-path '("~/code" "/Volumes/code" "~/orgfiles" "~/.dotfiles")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
@@ -477,17 +492,19 @@
   :hook (company-mode . company-box-mode))
 
 (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
-    :config
-    (setq lsp-ui-doc-enable nil)
-    (setq lsp-ui-sideline-enable nil)
-    (setq lsp-ui-peek-enable t))
+      :hook (lsp-mode . lsp-ui-mode)
+      :config
+      (setq lsp-ui-doc-enable nil)
+      (setq lsp-ui-sideline-enable nil)
+      (setq lsp-ui-peek-enable t))
 
   (use-package lsp-treemacs
-    :after lsp)
+      :after lsp
+  :config
+(lsp-treemacs-sync-mode 1))
 
   (use-package lsp-ivy
-    :commands lsp-ivy-workspace-symbol)
+      :commands lsp-ivy-workspace-symbol)
 
 (defun enable-minor-mode (my-pair)
   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."

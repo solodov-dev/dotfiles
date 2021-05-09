@@ -522,3 +522,18 @@
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
+
+(use-package emmet-mode
+:bind ((:map emmet-mode-keymap
+("C-c e" . emmet-expand-line)))
+    :hook
+    ((html-mode . emmet-mode)
+    (css-mode . emmet-mode)
+    (sgml-mode . emmet-mode))
+:config
+(setq emmet-indentation 2))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))

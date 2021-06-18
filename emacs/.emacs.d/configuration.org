@@ -41,13 +41,15 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
 
 #+begin_src emacs-lisp
 
-  (defun is-large-monitor ()
-    (> (display-pixel-width) 2000))
+    (defun is-large-monitor ()
+      (> (display-pixel-width) 2000))
 
-  (defun font-size ()
-    (if (is-large-monitor) 140) 100)
+    (defun font-size ()
+      (if (is-large-monitor)
+          140
+        100))
 
-  (defvar solo/default-font-size (font-size))
+    (defvar solo/default-font-size (font-size))
 
 #+end_src
 
@@ -316,37 +318,37 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
 
 [[https://orgmode.org/][Org Mode]] is one of the hallmark features of Emacs.  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
 
-** Better Font Faces
+** TODO Better Font Faces
 
 The =solo/org-font-setup= function configures various text faces to tweak the sizes of headings and use variable width fonts in most cases so that it looks more like we're editing a document in =org-mode=.  We switch back to fixed width (monospace) fonts for code blocks and tables so that they display correctly.
 
 #+begin_src emacs-lisp
 
-  (defun solo/org-font-setup ()
-    ;; Replace list hyphen with dot
-    (font-lock-add-keywords 'org-mode
-                            '(("^ *\\([-]\\) "
-                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+    (defun solo/org-font-setup ()
+      ;; Replace list hyphen with dot
+      (font-lock-add-keywords 'org-mode
+                              '(("^ *\\([-]\\) "
+                                 (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
-    ;; Set faces for heading levels
-    (dolist (face '((org-level-1 . 1.2)
-                    (org-level-2 . 1.1)
-                    (org-level-3 . 1.05)
-                    (org-level-4 . 1.0)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
-      (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
+      ;; Set faces for heading levels
+      (dolist (face '((org-level-1 . 1.2)
+                      (org-level-2 . 1.1)
+                      (org-level-3 . 1.05)
+                      (org-level-4 . 1.0)
+                      (org-level-5 . 1.1)
+                      (org-level-6 . 1.1)
+                      (org-level-7 . 1.1)
+                      (org-level-8 . 1.1)))
+        (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
 
-    ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+      ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+      (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 #+end_src
 
@@ -616,29 +618,32 @@ This snippet adds a hook to =org-mode= buffers so that =solo/org-babel-tangle-co
 
 #+begin_src emacs-lisp
 
-  (defun solo/lsp-mode-setup ()
-      (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-      (setq lsp-log-io nil)
-      (setq lsp-restart)
-      (setq lsp-ui-sideline-show-diagnostics t)
-      (setq lsp-ui-sideline-show-hover t)
-      (setq lsp-ui-sideline-show-code-actions t)
-      (lsp-headerline-breadcrumb-mode))
+    (defun solo/lsp-mode-setup ()
+        (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+        (setq lsp-log-io nil)
+        (setq lsp-restart)
+        (setq lsp-signature-render-documentation nil)
+        (lsp-headerline-breadcrumb-mode))
 
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-      :hook ((web-mode . solo/lsp-mode-setup)
-             (lsp-mode . solo/lsp-mode-setup))
-      :init
-      (setq lsp-keymap-prefix "C-c l")
-      :config
-      (lsp-enable-which-key-integration t))
+    (use-package lsp-mode
+      :commands (lsp lsp-deferred)
+        :hook ((web-mode . lsp-deferred)
+               (lsp-mode . solo/lsp-mode-setup))
+        :init
+        (setq lsp-keymap-prefix "C-c l")
+        :config
+        (lsp-enable-which-key-integration t))
 
-  (solo/leader-keys
-    "l" '(:ignore t :which-key "lsp")
-    "lr" '(lsp-rename :which-key "rename symbol")
-    "ld" '(lsp-find-definition :which-key "find definitions")
-    "lf" '(lsp-find-references :which-key "find references"))
+    (use-package lsp-treemacs
+      :after lsp)
+
+  (use-package lsp-ivy)
+
+    (solo/leader-keys
+      "l" '(:ignore t :which-key "lsp")
+      "lr" '(lsp-rename :which-key "rename symbol")
+      "ld" '(lsp-find-definition :which-key "find definitions")
+      "lf" '(lsp-find-references :which-key "find references"))
 
 
 #+end_src
@@ -696,19 +701,6 @@ This snippet adds a hook to =org-mode= buffers so that =solo/org-babel-tangle-co
 
 #+end_src
 
-*** UI Enchancements
-#+begin_src emacs-lisp
-
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode))
-
-  (use-package lsp-treemacs
-    :after lsp)
-
-(use-package lsp-ivy)
-
-#+end_src
-
 *** Linters
 
 #+begin_src emacs-lisp
@@ -745,5 +737,10 @@ This package is a port of the vim-commentary plugin for Vim. I wrote this becaus
 
 #+end_src
 
-
+**** 
+*** Emmet 
+#+begin_src emacs-lisp
+  (use-package emmet-mode
+  :hook (web-mode . emmet-mode))
+#+end_src
 

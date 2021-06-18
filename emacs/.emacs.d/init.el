@@ -20,7 +20,9 @@
   (> (display-pixel-width) 2000))
 
 (defun font-size ()
-  (if (is-large-monitor) 140) 100)
+  (if (is-large-monitor)
+      140
+    100))
 
 (defvar solo/default-font-size (font-size))
 
@@ -403,28 +405,31 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (defun solo/lsp-mode-setup ()
-    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (setq lsp-log-io nil)
-    (setq lsp-restart)
-    (setq lsp-ui-sideline-show-diagnostics t)
-    (setq lsp-ui-sideline-show-hover t)
-    (setq lsp-ui-sideline-show-code-actions t)
-    (lsp-headerline-breadcrumb-mode))
+      (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+      (setq lsp-log-io nil)
+      (setq lsp-restart)
+      (setq lsp-signature-render-documentation nil)
+      (lsp-headerline-breadcrumb-mode))
 
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-    :hook ((web-mode . solo/lsp-mode-setup)
-           (lsp-mode . solo/lsp-mode-setup))
-    :init
-    (setq lsp-keymap-prefix "C-c l")
-    :config
-    (lsp-enable-which-key-integration t))
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+      :hook ((web-mode . lsp-deferred)
+             (lsp-mode . solo/lsp-mode-setup))
+      :init
+      (setq lsp-keymap-prefix "C-c l")
+      :config
+      (lsp-enable-which-key-integration t))
 
-(solo/leader-keys
-  "l" '(:ignore t :which-key "lsp")
-  "lr" '(lsp-rename :which-key "rename symbol")
-  "ld" '(lsp-find-definition :which-key "find definitions")
-  "lf" '(lsp-find-references :which-key "find references"))
+  (use-package lsp-treemacs
+    :after lsp)
+
+(use-package lsp-ivy)
+
+  (solo/leader-keys
+    "l" '(:ignore t :which-key "lsp")
+    "lr" '(lsp-rename :which-key "rename symbol")
+    "ld" '(lsp-find-definition :which-key "find definitions")
+    "lf" '(lsp-find-references :which-key "find references"))
 
 (use-package typescript-mode
     :mode "\\.ts\\'"
@@ -456,14 +461,6 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
-(use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode))
-
-  (use-package lsp-treemacs
-    :after lsp)
-
-(use-package lsp-ivy)
-
 (defun enable-minor-mode (my-pair)
   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
   (if (buffer-file-name)
@@ -480,3 +477,6 @@
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
+
+(use-package emmet-mode
+:hook (web-mode . emmet-mode))

@@ -134,3 +134,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias heroes="cd ~/.wine/drive_c/GOG\ Games/HoMM\ 3\ Complete && wine Heroes3\ HD.exe"

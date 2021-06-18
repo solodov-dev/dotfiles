@@ -33,7 +33,17 @@
   (exec-path-from-shell-initialize))
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
-(setq backup-directory-alist '(("." . "~/.saves")))
+(setq auto-save-default nil)
+(setq create-lockfiles nil)
+(setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
+
+(defun save-all-unsaved ()
+  (interactive)
+  (save-some-buffers t ))
+
+(if (version< emacs-version "27")
+    (add-hook 'focus-out-hook 'save-all-unsaved)
+  (setq after-focus-change-function 'save-all-unsaved))
 
 (setq inhibit-startup-message t)
 
@@ -73,22 +83,22 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package general
-  :config
-  (general-create-definer solo/leader-keys
-  :keymaps '(normal insert visual emacs)
-  :prefix "SPC"
-  :global-prefix "C-SPC"))
+    :config
+    (general-create-definer solo/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC"))
 
 (use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump t)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-[") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
 ;; Use visual line motions even outside of visual-line-mode buffers
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -98,38 +108,59 @@
 (evil-set-initial-state 'dashboard-mode 'normal))
 
 (use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+    :after evil
+    :config
+    (evil-collection-init))
 
 ;; Buffers
 (solo/leader-keys
-  "b" '(:ignore t :which-key "buffers")
-  "bw" '(save-buffer :which-key "save buffer")
-  "be" '(eval-buffer :which-key "evaluate buffer")
-  "bs" '(counsel-switch-buffer :which-key "switch buffer")
-  "bq" '(kill-current-buffer :which-key "kill current buffer"))
+    "b" '(:ignore t :which-key "buffers")
+    "bw" '(save-buffer :which-key "save buffer")
+    "be" '(eval-buffer :which-key "evaluate buffer")
+    "bs" '(counsel-switch-buffer :which-key "switch buffer")
+    "bq" '(kill-current-buffer :which-key "kill current buffer"))
 
-;; Search
+;; Find
 (solo/leader-keys
-  "f" '(:ignore t :which-key "find")
-  "ff" '(project-find-file :which-key "project-find-file"))
+    "f" '(:ignore t :which-key "find")
+    "fd" '(xref-find-definitions-other-window :which-key "find definitions")
+    "fr" '(lsp-ui-peek-find-references :which-key "find references")
+    "ff" '(projectile-find-file :which-key "project-find-file")
+    "fp" '(projectile-switch-project :which-key "project-find-file"))
 
 (solo/leader-keys
 "," '((lambda () (interactive) (find-file "~/.dotfiles/emacs/.emacs.d/configuration.org")) :which-key "open config"))
 
+;; Toggle
 (solo/leader-keys
-  "t"  '(:ignore t :which-key "toggle")
-  "tt" '(treemacs :which-key "toggle treemacs"))
+    "t"  '(:ignore t :which-key "toggle")
+    "te" '(flymake-show-diagnostics-buffer :which-key "toggle errors")
+    "tE" '(lsp-treemacs-errors-list :which-key "toggle global errors")
+    "td" '(lsp-ui-doc-glance :which-key "toggle documentation")
+    "tt" '(treemacs :which-key "toggle treemacs"))
+
+;; Make
+(solo/leader-keys
+    "m"  '(:ignore t :which-key "make")
+    "mf" '(make-empty-file :whick-key "make empty file")
+    "md" '(make-directory :which-key "make directory"))
+
+;; Delete
+(solo/leader-keys
+    "d"  '(:ignore t :which-key "delete")
+    "df" '(delete-file :whick-key "delete file")
+    "dd" '(delete-directory :which-key "delete directory"))
 
 (use-package command-log-mode)
 
 (use-package doom-themes
-  :config
-  (load-theme 'doom-solarized-light t)
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config)
-  (doom-themes-treemacs-config))
+:custom
+  (doom-themes-treemacs-theme "doom-colors")
+    :config
+    (load-theme 'doom-solarized-light t)
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config)
+    (doom-themes-treemacs-config))
 
 (use-package all-the-icons)
 
@@ -145,20 +176,20 @@
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
+  :map ivy-minibuffer-map
+  ("TAB" . ivy-alt-done)
+  ("C-l" . ivy-alt-done)
+  ("C-j" . ivy-next-line)
+  ("C-k" . ivy-previous-line)
+  :map ivy-switch-buffer-map
+  ("C-k" . ivy-previous-line)
+  ("C-l" . ivy-done)
+  ("C-d" . ivy-switch-buffer-kill)
+  :map ivy-reverse-i-search-map
+  ("C-k" . ivy-previous-line)
+  ("C-d" . ivy-reverse-i-search-kill))
   :config
-  (ivy-mode 1))
+(ivy-mode 1))
 
 (use-package ivy-rich
   :init
@@ -166,8 +197,8 @@
 
 (use-package counsel
   :bind (("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
+  :map minibuffer-local-map
+  ("C-r" . 'counsel-minibuffer-history))
   :config
   (counsel-mode 1))
 
@@ -379,7 +410,7 @@
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/code")
-    (setq projectile-project-search-path '("~/code")))
+    (setq projectile-project-search-path '("~/code" "/Volumes/code" "~/orgfiles" "~/.dotfiles")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
@@ -404,32 +435,29 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(defun solo/lsp-mode-setup ()
-      (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-      (setq lsp-log-io nil)
-      (setq lsp-restart)
-      (setq lsp-signature-render-documentation nil)
-      (lsp-headerline-breadcrumb-mode))
+(defun solo/lsp-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (setq lsp-log-io nil)
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-eldoc-hook nil)
+  (setq lsp-modeline-code-actions-segments '(count icon name))
+  (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
+  (lsp-headerline-breadcrumb-mode))
 
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-      :hook ((web-mode . lsp-deferred)
-             (lsp-mode . solo/lsp-mode-setup))
-      :init
-      (setq lsp-keymap-prefix "C-c l")
-      :config
-      (lsp-enable-which-key-integration t))
+    (use-package lsp-mode
+        :commands (lsp lsp-deferred)
+        :hook ((lsp-mode . solo/lsp-setup)
+               (prog-mode . lsp-deferred))
+        :init
+        (setq lsp-keymap-prefix "C-c l")
+        :config
+        (lsp-enable-which-key-integration t))
 
-  (use-package lsp-treemacs
-    :after lsp)
-
-(use-package lsp-ivy)
-
-  (solo/leader-keys
-    "l" '(:ignore t :which-key "lsp")
-    "lr" '(lsp-rename :which-key "rename symbol")
-    "ld" '(lsp-find-definition :which-key "find definitions")
-    "lf" '(lsp-find-references :which-key "find references"))
+    (solo/leader-keys
+      "l" '(:ignore t :which-key "lsp")
+      "lr" '(lsp-rename :which-key "rename symbol")
+      "ld" '(lsp-find-definition :which-key "find definitions")
+      "lf" '(lsp-find-references :which-key "find references"))
 
 (use-package typescript-mode
     :mode "\\.ts\\'"
@@ -453,7 +481,11 @@
 
 (use-package company
     :after lsp-mode
-    :hook (lsp-mode . company-mode)
+    :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+            ("<tab>" . company-complete-selection))
+          (:map lsp-mode-map
+              ("<tab>" . company-indent-or-complete-common))
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
@@ -461,22 +493,49 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+(use-package lsp-ui
+      :hook (lsp-mode . lsp-ui-mode)
+      :config
+      (setq lsp-ui-doc-enable nil)
+      (setq lsp-ui-sideline-enable nil)
+      (setq lsp-ui-peek-enable t))
+
+  (use-package lsp-treemacs
+      :after lsp
+  :config
+(lsp-treemacs-sync-mode 1))
+
+  (use-package lsp-ivy
+      :commands lsp-ivy-workspace-symbol)
+
 (defun enable-minor-mode (my-pair)
   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
   (if (buffer-file-name)
       (if (string-match (car my-pair) buffer-file-name)
-	  (funcall (cdr my-pair)))))
+          (funcall (cdr my-pair)))))
 
 (use-package prettier-js
   :ensure t)
 (add-hook 'web-mode-hook #'(lambda ()
                              (enable-minor-mode
                               '("\\.jsx?\\'" . prettier-js-mode))
-			     (enable-minor-mode
+                             (enable-minor-mode
                               '("\\.tsx?\\'" . prettier-js-mode))))
 
 (use-package evil-commentary
   :init (evil-commentary-mode))
 
 (use-package emmet-mode
-:hook (web-mode . emmet-mode))
+:bind ((:map emmet-mode-keymap
+("C-c e" . emmet-expand-line)))
+    :hook
+    ((html-mode . emmet-mode)
+    (css-mode . emmet-mode)
+    (sgml-mode . emmet-mode))
+:config
+(setq emmet-indentation 2))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))

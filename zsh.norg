@@ -1,0 +1,50 @@
+@document.meta
+tangle: {
+    languages: {
+      zsh: ~/.zshrc
+    }
+    scope: all
+}
+@end
+
+@code zsh
+export ZSH="$HOME/.oh-my-zsh"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+ZSH_THEME="minimal"
+EDITOR='vim'
+source $ZSH/oh-my-zsh.sh
+
+alias vim=nvim
+alias zsource="source ~/.zshrc"
+alias zconfig="vim ~/.zshrc"
+alias off=poweroff
+
+# git aliases
+alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && git push origin master"
+alias gtree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gprune="git fetch --prune && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
+alias g=lazygit
+
+mkcd () {
+  mkdir "$1"
+  cd "$1"
+}
+
+checkGitDir () {
+  echo -e "\n\e[1;35m== $1 status ==\033[0m\n"
+  git -C $2 status
+}
+
+path+=$HOME/.cargo/bin/
+
+if [[ ! -d ${ZSH_CUSTOM}/themes/minimal ]]
+then
+  echo "Installing minimal theme"
+  git clone https://github.com/subnixr/minimal.git  ${ZSH_CUSTOM}/themes/minimal
+  ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
+  echo "Theme installed"
+fi
+
+plugins=(git)
+@end

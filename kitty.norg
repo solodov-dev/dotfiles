@@ -8,6 +8,11 @@ tangle: {
 @end
 
 @code kitty
+font_family      FiraCode NFM
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+
 # Tokyo Night color scheme for kitty terminal emulator
 # https://github.com/davidmathers/tokyo-night-kitty-theme
 #
@@ -85,4 +90,6 @@ macos_titlebar_color #16161e
 # active_tab_background   #1f2335
 # inactive_tab_background #1f2335
 # macos_titlebar_color #1f2335
+
+
 @end

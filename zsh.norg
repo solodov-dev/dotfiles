@@ -15,25 +15,27 @@ ZSH_THEME="minimal"
 EDITOR='vim'
 source $ZSH/oh-my-zsh.sh
 
+# config aliases
 alias vim=nvim
 alias zsource="source ~/.zshrc"
-alias zconfig="vim ~/.zshrc"
+alias zconfig="vim ~/.dotfiles/zsh.norg"
+alias vconfig="cd ~/.config/nvim && vim ."
+alias dotfiles="cd ~/.dotfiles && vim ." 
 alias off=poweroff
 
 # git aliases
 alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && git push origin master"
 alias gtree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gprune="git fetch --prune && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
-alias g=lazygit
 
 mkcd () {
   mkdir "$1"
   cd "$1"
 }
 
-checkGitDir () {
+gitstat () {
   echo -e "\n\e[1;35m== $1 status ==\033[0m\n"
-  git -C $2 status
+  git -C $1 status
 }
 
 path+=$HOME/.cargo/bin/
@@ -47,4 +49,6 @@ then
 fi
 
 plugins=(git)
+
+[ -f "/home/andrey/.ghcup/env" ] && source "/home/andrey/.ghcup/env" # ghcup-env
 @end

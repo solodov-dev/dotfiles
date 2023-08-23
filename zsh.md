@@ -1,3 +1,8 @@
+---
+title: zsh config
+author: Andrey Solodov
+tangle: ~/.zshrc
+---
 # Zsh config
 
 This is a literate zsh config. Please tangle to create a ~/.zshrc file.

@@ -1,24 +1,23 @@
-@document.meta
-tangle: {
-    languages: {
-      kitty: ~/.config/kitty/kitty.conf
-    }
-    scope: all
-}
-@end
+---
+title: Kitty terminal config
+author: Andrey Solodov
+tangle: ~/.config/kitty/kitty.conf
+---
 
-@code kitty
+## Fonts
+
+```sh 
 font_family      FiraCode NFM
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
+```
 
-# Tokyo Night color scheme for kitty terminal emulator
-# https://github.com/davidmathers/tokyo-night-kitty-theme
-#
-# Based on Tokyo Night color theme for Visual Studio Code
-# https://github.com/enkia/tokyo-night-vscode-theme
+## Theme
+Tokyo Night color scheme for kitty terminal emulator from [davidmathers](https://github.com/davidmathers/tokyo-night-kitty-theme).
+Based on Tokyo Night color theme for [Visual Studio Code](https://github.com/enkia/tokyo-night-vscode-theme)
 
+```sh
 foreground #a9b1d6
 background #1a1b26
 
@@ -90,6 +89,4 @@ macos_titlebar_color #16161e
 # active_tab_background   #1f2335
 # inactive_tab_background #1f2335
 # macos_titlebar_color #1f2335
-
-
-@end
+```

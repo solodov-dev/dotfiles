@@ -7,6 +7,12 @@ tangle: ~/.zshrc
 
 This is a literate zsh config. Please tangle to create a ~/.zshrc file.
 
+## Variables
+```sh
+ZSH_THEME="minimal"
+EDITOR='vim'
+```
+
 ## Oh-my-zsh framework
 ```sh
 export ZSH="$HOME/.oh-my-zsh"
@@ -22,13 +28,6 @@ then
   ln -s ${ZSH_CUSTOM}/themes/minimal/minimal.zsh ${ZSH_CUSTOM}/themes/minimal.zsh-theme
   echo "Theme installed"
 fi
-
-ZSH_THEME="minimal"
-```
-
-## Variables
-```sh
-EDITOR='vim'
 ```
 
 ## Aliases

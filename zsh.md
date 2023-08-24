@@ -78,3 +78,9 @@ path+=$HOME/.cargo/bin/
 ```sh
 [ -f "/home/andrey/.ghcup/env" ] && source "/home/andrey/.ghcup/env"
 ```
+
+### Kitty SSH
+When kitty is used to ssh into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an ssh kitten to automate exactly this.
+```sh
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+```

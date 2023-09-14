@@ -5,7 +5,6 @@ tangle: ~/.config/kitty/kitty.conf
 ---
 
 ## Fonts
-
 ```sh 
 font_family      FiraCode NFM
 bold_font        auto

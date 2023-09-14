@@ -1,10 +1,4 @@
----
-title: zsh config
-author: Andrey Solodov
-tangle: ~/.zshrc
----
 # Zsh config
-
 This is a literate zsh config. Please tangle to create a ~/.zshrc file.
 
 ## Variables
@@ -16,6 +10,11 @@ EDITOR='vim'
 ## Oh-my-zsh framework
 ```sh
 export ZSH="$HOME/.oh-my-zsh"
+if [[ ! -d ${ZSH} ]]
+then
+  echo "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+fi
 source $ZSH/oh-my-zsh.sh
 ```
 
@@ -38,6 +37,7 @@ alias zconfig="vim ~/.dotfiles/zsh.norg"
 alias vconfig="cd ~/.config/nvim && vim ."
 alias dotfiles="cd ~/.dotfiles && vim ." 
 alias off=poweroff
+alias tangle="~/.dotfiles/tangle"
 ```
 
 ## Git aliases
@@ -66,6 +66,11 @@ plugins=(git)
 ### NVM
 ```sh
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+if [[ ! -d $NVM_DIR ]]
+then
+  echo "Installing NVM"
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash 
+fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 

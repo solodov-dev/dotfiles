@@ -42,17 +42,17 @@ fi
 
 if [[ ! -f "$input" ]] 
 then
-  echo "Input file ${input} doesn't exist."
+  echo "Input file $input doesn't exist."
   exit
 fi
 
 if [[ ! $input == *.md ]]
 then
-  echo "File ${input} is not a markdown file"
+  echo "File $input is not a markdown file"
   exit
 fi
 
 eval output="$(awk '/tangle:/{print $2}' $input)"
 stripped=$(awk '/```./{flag=1; next} /```/{flag=0} flag' $input)
 echo "$stripped" > $output
-echo "Tangled $(wc -l <<< "$stripped") lines from ${input} to ${output}"
+echo "Tangled $(wc -l <<< "$stripped") lines from $input to $output"

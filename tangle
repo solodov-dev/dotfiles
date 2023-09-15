@@ -7,11 +7,12 @@ Help()
   # Display Help
   echo "This script tangles codeblocks from the given md file to the specified file overwriting it"
   echo
-  echo "Syntax: $(basename $0) [-h] [input] [output]"
+  echo "Syntax: $(basename $0) [-h] [input]"
   echo
   echo "Options:"
   echo "input  : tangle from file FILE. Must be a valid markdown file." 
-  echo "output : tangle to FILE. If any destinations are given in the markdown file, they will be ignored."
+  echo 
+  echo "The output will be tangled to the file specified in a tnagle: section of metadata of the md file"
   echo
 }
 ################################################################################
@@ -25,14 +26,13 @@ while getopts ":hi:o:" option; do
         exit
         ;;
       ?)
-        echo -e "Invalid command option.\nUsage: $(basename $0) [-h] [input] [output]"
+        echo -e "Invalid command option.\nUsage: $(basename $0) [-h] [input]"
         exit
         ;;
    esac
 done
 
 input=$1
-output=$2
 
 if [[ -z "$input" ]]
 then
@@ -52,35 +52,7 @@ then
   exit
 fi
 
-if [[ -z $output ]]
-then
-  echo "Output file is not specified"
-  exit
-fi
-
-echo "Tangling file: ${input} to ${output}"
-
-lines=""
-insideCodeBlock=false
-
-while IFS= read -r line
-do
-  if [[ $line == \`\`\`* ]]
-  then
-    if $insideCodeBlock
-    then
-      insideCodeBlock=false 
-    else
-      insideCodeBlock=true 
-    fi
-    continue
-  fi
-
-  if $insideCodeBlock
-  then
-    lines+=$line
-    lines+="\n"
-  fi
-done < "$input"
-
-echo -e $lines > $output
+eval output="$(awk '/tangle:/{print $2}' $input)"
+stripped=$(awk '/```./{flag=1; next} /```/{flag=0} flag' $input)
+echo "$stripped" > $output
+echo "Tangled $(wc -l <<< "$stripped") lines from ${input} to ${output}"

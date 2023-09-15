@@ -1,12 +1,14 @@
 ---
 title: Xinit config
 author: Andrey Solodov
-tangle: ~/.xinitrc or /etc/lemurs/wms/awesome
+tangle: /etc/lemurs/wms/awesome or ~/.xinitrc
 ---
 
 # Xinitrc config for starting X server.
 You can tangle this file to ~/.xinitrc or if you use something like lemurs to 
 /etc/lemurs/wms/awesome
+
+!!! DON"T FORGET TO MAKE /etc/lemurs/wms/awesome EXECUTABLE !!!
 
 ```sh
 #!/bin/sh 

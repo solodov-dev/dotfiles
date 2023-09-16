@@ -10,8 +10,7 @@ Set capslock to ctrl, layouts to English and Russian and toggle layouts with Ctr
 Section "InputClass"
     Identifier "keyboard defaults"
     MatchIsKeyboard "on"
-    Option "XKbOptions" "ctrl:nocaps"
+    Option "XKbOptions" "ctrl:nocaps,grp:ctrl_space_toggle"
     Option "XKbLayout" "us,ru"
-    Option "XkbOptions" "grp:ctrl_space_toggle"
 EndSection
 ```

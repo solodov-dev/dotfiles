@@ -53,6 +53,7 @@ alias vconfig="cd ~/.config/nvim && vim ."
 alias dotfiles="cd ~/.dotfiles && vim ." 
 alias off=poweroff
 alias tangle="~/.dotfiles/tangle"
+alias dot="cd ~/.dotfiles"
 ```
 
 ## Git aliases

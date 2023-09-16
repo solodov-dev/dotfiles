@@ -10,4 +10,8 @@ tangle: ~/.gitconfig
 [user]
 	email = solodov.dev@gmail.com
 	name = Andrey Solodov
+[core]
+	autocrlf = input
+[init]
+	defaultBranch = master
 ```

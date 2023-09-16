@@ -10,11 +10,9 @@ You can tangle this file to ~/.xinitrc or if you use something like lemurs to
 
 !!! DON"T FORGET TO MAKE /etc/lemurs/wms/awesome EXECUTABLE !!!
 
-```sh
-#!/bin/sh 
-```
 ##  Auto-mount usb disks
 ```sh
+#!/bin/sh 
 udiskie &
 ```
 

@@ -7,6 +7,7 @@ tangle: ~/.zshrc
 ## Variables
 ```sh
 EDITOR='vim'
+ZSH_THEME="minimal"
 ```
 
 ## Oh-my-zsh framework
@@ -30,9 +31,6 @@ source $ZSH/oh-my-zsh.sh
 ```
 
 ## Theme
-```sh
-ZSH_THEME="minimal"
-```
 If theme is not installed, install it
 ```sh
 if [[ ! -d ${ZSH_CUSTOM}/themes/minimal ]]

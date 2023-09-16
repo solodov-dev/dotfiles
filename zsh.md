@@ -4,27 +4,36 @@ author: Andrey Solodov
 tangle: ~/.zshrc
 ---
 
-# Zsh config
-This is a literate zsh config. Please tangle to create a ~/.zshrc file.
-
 ## Variables
 ```sh
-ZSH_THEME="minimal"
 EDITOR='vim'
 ```
 
 ## Oh-my-zsh framework
+
+ Export oh-my-zsh dir
 ```sh
 export ZSH="$HOME/.oh-my-zsh"
+```
+
+If oh-my-zsh is not isntalled, install it
+```sh
 if [[ ! -d ${ZSH} ]]
 then
   echo "Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 fi
+```
+Source
+```sh
 source $ZSH/oh-my-zsh.sh
 ```
 
 ## Theme
+```sh
+ZSH_THEME="minimal"
+```
+If theme is not installed, install it
 ```sh
 if [[ ! -d ${ZSH_CUSTOM}/themes/minimal ]]
 then

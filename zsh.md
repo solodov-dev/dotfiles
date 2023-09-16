@@ -47,6 +47,7 @@ fi
 ## Aliases
 ```sh
 alias vim=nvim
+alias v=nvim
 alias zsource="source ~/.zshrc"
 alias zconfig="vim ~/.dotfiles/zsh.norg"
 alias vconfig="cd ~/.config/nvim && vim ."

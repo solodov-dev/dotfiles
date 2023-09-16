@@ -13,17 +13,11 @@ You can tangle this file to ~/.xinitrc or if you use something like lemurs to
 ```sh
 #!/bin/sh 
 ```
-##  Auto-mount usb disks
+Auto-mount usb disks
 ```sh
 udiskie &
 ```
-
-## Auto manage screen brightness (turn your web-cam into a light sensor)
-```sh
-clight &
-```
-
-## Start awesome WM
+Start awesome WM
 ```sh
 exec awesome
 ```

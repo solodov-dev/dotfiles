@@ -425,11 +425,11 @@ globalkeys = gears.table.join(
   -- Media keys
   awful.key({}, "XF86MonBrightnessUp",
     function()
-      os.execute("xbacklight -inc 5")
+      os.execute("brightnessctl s 10%+")
     end, { description = "+5", group = "hotkeys" }),
   awful.key({}, "XF86MonBrightnessDown",
     function()
-      os.execute("xbacklight -dec 5")
+      os.execute("brightnessctl s 10%-")
     end, { description = "-5%", group = "hotkeys" }),
   awful.key({}, "XF86AudioRaiseVolume",
     function()

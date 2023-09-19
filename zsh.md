@@ -104,3 +104,8 @@ When kitty is used to ssh into a remote that does not have its terminfo, various
 ```sh
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 ```
+
+## Path
+```sh
+export PATH="$(yarn global bin):$PATH"
+```

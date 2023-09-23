@@ -47,7 +47,7 @@ fi
 alias vim=nvim
 alias v=nvim
 alias zsource="source ~/.zshrc"
-alias zconfig="vim ~/.dotfiles/zsh.norg"
+alias zconfig="cd ~/.dotfiles && vim zsh.md"
 alias vconfig="cd ~/.config/nvim && vim ."
 alias dotfiles="cd ~/.dotfiles && vim ." 
 alias off=poweroff
@@ -89,9 +89,10 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-### Cargo
+### Path
 ```sh
 path+=$HOME/.cargo/bin/
+path+=/usr/local/go/bin/
 ```
 
 ### GHCup env

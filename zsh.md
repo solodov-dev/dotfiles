@@ -89,12 +89,6 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-### Path
-```sh
-path+=$HOME/.cargo/bin/
-path+=/usr/local/go/bin/
-```
-
 ### GHCup env
 ```sh
 [ -f "/home/andrey/.ghcup/env" ] && source "/home/andrey/.ghcup/env"
@@ -104,4 +98,11 @@ path+=/usr/local/go/bin/
 When kitty is used to ssh into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an ssh kitten to automate exactly this.
 ```sh
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+```
+
+## Path
+```sh
+path+="$(yarn global bin)"
+path+=/usr/local/go/bin/
+path+=$HOME/.cargo/bin/
 ```

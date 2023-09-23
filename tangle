@@ -1,58 +1,7 @@
-#!/bin/bash
-################################################################################
-# Help                                                                         #
-################################################################################
-Help()
-{
-  # Display Help
-  echo "This script tangles codeblocks from the given md file to the specified file overwriting it"
-  echo
-  echo "Syntax: $(basename $0) [-h] [input]"
-  echo
-  echo "Options:"
-  echo "input  : tangle from file FILE. Must be a valid markdown file." 
-  echo 
-  echo "The output will be tangled to the file specified in a tnagle: section of metadata of the md file"
-  echo
-}
-################################################################################
-# Main                                                                         #
-################################################################################
-# Get the options
-while getopts ":hi:o:" option; do
-   case $option in
-      h) # display Help
-        Help
-        exit
-        ;;
-      ?)
-        echo -e "Invalid command option.\nUsage: $(basename $0) [-h] [input]"
-        exit
-        ;;
-   esac
-done
+#!/usr/bin/awk -f
 
-input=$1
-
-if [[ -z "$input" ]]
-then
-  echo "No input file specified. Please use -h for help."
-  exit
-fi
-
-if [[ ! -f "$input" ]] 
-then
-  echo "Input file $input doesn't exist."
-  exit
-fi
-
-if [[ ! $input == *.md ]]
-then
-  echo "File $input is not a markdown file"
-  exit
-fi
-
-eval output="$(awk '/tangle:/{print $2}' $input)"
-stripped=$(awk '/```./{flag=1; next} /```/{flag=0} flag' $input)
-echo "$stripped" > $output
-echo "Tangled $(wc -l <<< "$stripped") lines from $input to $output"
+BEGIN {printf "Tangling file %s\n", ARGV[1]}
+/tangle:/{output=$2}
+/```/{n+=1} 
+n%2==1 && ! /```/ {print $0 > output; nl++}
+END {printf "%i lines tangled to %s\n", nl, output}

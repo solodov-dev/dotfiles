@@ -89,11 +89,6 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-### Cargo
-```sh
-path+=$HOME/.cargo/bin/
-```
-
 ### GHCup env
 ```sh
 [ -f "/home/andrey/.ghcup/env" ] && source "/home/andrey/.ghcup/env"
@@ -107,5 +102,6 @@ When kitty is used to ssh into a remote that does not have its terminfo, various
 
 ## Path
 ```sh
-export PATH="$(yarn global bin):$PATH"
+path+="$(yarn global bin)"
+path+=$HOME/.cargo/bin/
 ```

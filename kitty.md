@@ -5,7 +5,7 @@ tangle: ~/.config/kitty/kitty.conf
 ---
 
 ## Fonts
-```text 
+``` 
 font_family      FiraCode NFM
 bold_font        auto
 italic_font      auto
@@ -16,7 +16,7 @@ bold_italic_font auto
 Tokyo Night color scheme for kitty terminal emulator from [davidmathers](https://github.com/davidmathers/tokyo-night-kitty-theme).
 Based on Tokyo Night color theme for [Visual Studio Code](https://github.com/enkia/tokyo-night-vscode-theme)
 
-```text
+```
 foreground #a9b1d6
 background #1a1b26
 

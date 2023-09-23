@@ -8,6 +8,7 @@ tangle: ~/.config/nvim/init.lua
 Some global settings such as `<leader>` key, tabstops, etc.
 ```lua
 vim.g.mapleader = " "
+vim.g.netrw_preview = 1
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true

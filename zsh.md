@@ -53,6 +53,7 @@ alias dotfiles="cd ~/.dotfiles && vim ."
 alias off=poweroff
 alias tangle="~/.dotfiles/tangle"
 alias dot="cd ~/.dotfiles"
+alias g=lazygit
 ```
 
 ## Git aliases
@@ -69,11 +70,6 @@ mkcd () {
   mkdir "$1"
   cd "$1"
 }
-```
-
-## Plugins
-```sh
-plugins=(git)
 ```
 
 ## Tools
@@ -98,6 +94,12 @@ fi
 When kitty is used to ssh into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an ssh kitten to automate exactly this.
 ```sh
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+```
+
+## Plugins
+```sh
+plugins=(git vi-mode)
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 ```
 
 ## Path

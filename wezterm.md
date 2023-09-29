@@ -28,6 +28,17 @@ config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font 'Fira Code Nerd Font'
 ```
 
+## Keys
+```lua
+config.keys = {
+    {
+        key = 'n',
+        mods = 'SHIFT|CTRL',
+        action = wezterm.action.ToggleFullScreen,
+    },
+}
+```
+
 And finally, return the configuration to wezterm
 ```lua
 return config

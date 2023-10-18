@@ -5,7 +5,9 @@ tangle: ~/.config/nvim/init.lua
 ---
 
 ## Settings
+
 Some global settings such as `<leader>` key, tabstops, etc.
+
 ```lua
 vim.g.mapleader = " "
 vim.g.netrw_preview = 1
@@ -28,6 +30,7 @@ vim.opt.clipboard = "unnamedplus"
 ```
 
 ## Keymaps
+
 ```lua
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move line down
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move line up
@@ -35,7 +38,9 @@ vim.keymap.set("n", "J", "mzJ`z") -- connect line without moving the coursor
 ```
 
 ## Plugins
+
 Init lazy.nvim plugin manager.
+
 ```lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -52,13 +57,17 @@ vim.opt.rtp:prepend(lazypath)
 ```
 
 ### List of plugins
+
 A table with all the plugins we are going to install.
+
 ```lua
 local plugins = {}
 ```
 
 ### Themes
+
 Add some themes.
+
 ```lua
 table.insert(plugins, {
   "folke/tokyonight.nvim",
@@ -67,13 +76,15 @@ table.insert(plugins, {
   opts = {},
 })
 
-table.insert(plugins, { 
+table.insert(plugins, {
   "ellisonleao/gruvbox.nvim", priority = 1000
 })
 ```
 
 ### Lsp
+
 Setup language servers
+
 ```lua
 table.insert(plugins, {
   'VonHeikemen/lsp-zero.nvim',
@@ -133,7 +144,9 @@ table.insert(plugins, {
 ```
 
 ### NeoGit
+
 Setup git integration.
+
 ```lua
 table.insert(plugins, {
   "NeogitOrg/neogit",
@@ -147,7 +160,9 @@ table.insert(plugins, {
 ```
 
 ### Trouble
+
 List diagnostics in a nice quickfix list.
+
 ```lua
 table.insert(plugins, {
   {
@@ -163,7 +178,9 @@ table.insert(plugins, {
 ```
 
 ### Comment
+
 Fast comments.
+
 ```lua
 table.insert(plugins, {
   'numToStr/Comment.nvim',
@@ -175,7 +192,9 @@ table.insert(plugins, {
 ```
 
 ### Lualine
+
 Beautiful line.
+
 ```lua
 table.insert(plugins, {
   'nvim-lualine/lualine.nvim',
@@ -183,7 +202,7 @@ table.insert(plugins, {
   dependencies = {
    'nvim-tree/nvim-web-devicons',
   },
-  config = function () 
+  config = function ()
     require("lualine").setup {
       options = {
       -- ... your lualine config
@@ -196,7 +215,9 @@ table.insert(plugins, {
 ```
 
 ### Barbecue
+
 Show breadcrumbs at the top.
+
 ```lua
 table.insert(plugins, {
   "utilyre/barbecue.nvim",
@@ -218,7 +239,9 @@ table.insert(plugins, {
 ```
 
 ### Surround
+
 Surround object.
+
 ```lua
 table.insert(plugins, {
     "kylechui/nvim-surround",
@@ -232,8 +255,44 @@ table.insert(plugins, {
 })
 ```
 
+### Format
+
+Surround object.
+
+```lua
+table.insert(plugins, {
+    'stevearc/conform.nvim',
+     opts = {
+         formatters_by_ft = {
+            lua = { "stylua" },
+            -- Conform will run multiple formatters sequentially
+            python = { "isort", "black" },
+            -- Use a sub-list to run only the first available formatter
+            javascript = { { "prettierd", "prettier" } },
+            javascriptreact = { { "prettierd", "prettier" } },
+            typescript = { { "prettierd", "prettier" } },
+            typescriptreact = { { "prettierd", "prettier" } },
+            html = { { "prettierd", "prettier" } },
+            css = { { "prettierd", "prettier" } },
+            json = { { "prettierd", "prettier" } },
+            markdown = { { "prettierd", "prettier" } },
+            graphql = { { "prettierd", "prettier" } },
+            svelte = { { "prettierd", "prettier" } },
+            yaml = { { "prettierd", "prettier" } },
+          },
+        format_on_save = {
+            -- These options will be passed to conform.format()
+            timeout_ms = 500,
+            lsp_fallback = true,
+         },
+    },
+})
+```
+
 ### Whichkey
+
 Show hotkeys at the bottom in case you forgot.
+
 ```lua
 table.insert(plugins, {
   "folke/which-key.nvim",
@@ -267,7 +326,7 @@ table.insert(plugins, {
         a = { vim.lsp.buf.code_action, "Actions" },
         r = { vim.lsp.buf.references, "References" },
         R = { vim.lsp.buf.rename, "Rename" },
-        f = { vim.lsp.buf.format, "Format" },
+        f = { function () require("conform").format({ async=true, lsp_fallback=true}) end, "Format" },
       },
       d = {
         name = "Diagnostics",
@@ -292,7 +351,9 @@ table.insert(plugins, {
 ```
 
 ### Telescope
+
 Search files, buffers, strings and much more.
+
 ```lua
 table.insert(plugins, {
   'nvim-telescope/telescope.nvim',
@@ -323,7 +384,9 @@ table.insert(plugins, {
 ```
 
 ### Treesitter
+
 Setup code hightlighting.
+
 ```lua
 table.insert(plugins, {
   "nvim-treesitter/nvim-treesitter",
@@ -342,14 +405,17 @@ table.insert(plugins, {
 ```
 
 ### Conflicts
+
 Show and operate on git conflicts.
+
 ```lua
 table.insert(plugins, {
- 'akinsho/git-conflict.nvim', version = "*", config = true 
+ 'akinsho/git-conflict.nvim', version = "*", config = true
 })
 ```
 
 Now we can load the plugins.
+
 ```lua
 require("lazy").setup(plugins)
 vim.cmd[[colorscheme gruvbox]]

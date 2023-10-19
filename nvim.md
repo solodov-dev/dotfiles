@@ -338,6 +338,14 @@ table.insert(plugins, {
         q = { "<cmd>Trouble quickfix<cr>", "Quickfix" },
         l = { "<cmd>Trouble loclist<cr>", "Loclist" },
       },
+      t = {
+        name = "Terminal",
+        t = { "<cmd>ToggleTerm direction=float<cr>", "Toggle" },
+        v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+        h = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
+        g = { "<cmd>lua _lazygit_toggle()<cr>", "Git" },
+        y = { "<cmd>lua _yarn_toggle()<cr>", "Yarn start" },
+      },
       p = { "\"_dP", "Paste (delete to void)" },
       v = { function() vim.cmd.edit('~/.config/nvim/init.lua') end, "Edit config" },
       S = { function() vim.cmd.edit('/tmp/scratch.md') end, "Scratchpad" },
@@ -414,9 +422,53 @@ table.insert(plugins, {
 })
 ```
 
+### Terminal
+
+Show and operate on git conflicts.
+
+```lua
+table.insert(plugins, {
+  'akinsho/toggleterm.nvim',
+  version = "*",
+  opts = {--[[ things you want to change go here]]}
+})
+```
+
+Setup keybindings for terminal mode
+
+```lua
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+```
+
+Custom terminals
+
 Now we can load the plugins.
 
 ```lua
 require("lazy").setup(plugins)
 vim.cmd[[colorscheme gruvbox]]
+```
+
+```lua
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local yarn = Terminal:new({ cmd = "yarn start", hidden = true, direction = "float" })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+function _yarn_toggle()
+  yarn:toggle()
+end
 ```

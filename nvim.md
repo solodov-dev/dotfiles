@@ -257,7 +257,7 @@ table.insert(plugins, {
 
 ### Format
 
-Surround object.
+Formatter to work with different languages
 
 ```lua
 table.insert(plugins, {
@@ -311,7 +311,8 @@ table.insert(plugins, {
         r = { "<cmd>Telescope live_grep<cr>", "Live grep" },
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
         u = { "<cmd>Telescope undo<cr>", "Undo tree" },
-        o = { "<cmd>Telescope oldfiles<cr>", "Oldfiles" },
+        h = { "<cmd>Telescope oldfiles<cr>", "History" },
+        o = { "<cmd>Oil<cr>", "Oil (edit files as buffer)" },
         e = { vim.cmd.Ex, "File explorer" },
       },
       g = {
@@ -411,6 +412,19 @@ Show and operate on git conflicts.
 ```lua
 table.insert(plugins, {
  'akinsho/git-conflict.nvim', version = "*", config = true
+})
+```
+
+### Files
+
+Work with a directory as a buffer
+
+```lua
+table.insert(plugins, {
+  'stevearc/oil.nvim',
+  opts = {},
+  -- Optional dependencies
+  dependencies = { "nvim-tree/nvim-web-devicons" },
 })
 ```
 

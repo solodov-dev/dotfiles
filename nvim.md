@@ -321,8 +321,9 @@ table.insert(plugins, {
       },
       l = {
         name = "LSP",
-        i = { "<cmd>Mason<cr>", "Install" },
+        I = { "<cmd>Mason<cr>", "Install" },
         d = { vim.lsp.buf.definition, "Definiion" },
+        i = { vim.lsp.buf.implementation, "Implementation" },
         h = { vim.lsp.buf.hover, "Signature" },
         a = { vim.lsp.buf.code_action, "Actions" },
         r = { vim.lsp.buf.references, "References" },

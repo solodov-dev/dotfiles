@@ -118,7 +118,6 @@ table.insert(plugins, {
       'eslint',
       'lua_ls',
       'tsserver',
-      'hls',
       'yamlls' })
 
     lsp.setup()

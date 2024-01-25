@@ -117,7 +117,6 @@ table.insert(plugins, {
       'emmet_ls',
       'eslint',
       'lua_ls',
-      'rust_analyzer',
       'tsserver',
       'hls',
       'yamlls' })
@@ -411,7 +410,7 @@ table.insert(plugins, {
   config = function()
     local configs = require("nvim-treesitter.configs")
     configs.setup({
-      ensure_installed = { "rust", "lua", "vim", "vimdoc", "query", "haskell", "css", "javascript", "html", "typescript",
+      ensure_installed = { "rust", "lua", "vim", "vimdoc", "query", "css", "javascript", "html", "typescript",
         "markdown", "bash" },
       sync_install = false,
       highlight = { enable = true },

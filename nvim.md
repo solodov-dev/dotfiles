@@ -141,6 +141,13 @@ table.insert(plugins, {
     })
   end,
 })
+
+-- Rust
+table.insert(plugins, {
+  'mrcjkb/rustaceanvim',
+  version = '^3', -- Recommended
+  ft = { 'rust' },
+})
 ```
 
 ### NeoGit

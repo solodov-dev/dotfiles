@@ -122,6 +122,26 @@ table.insert(plugins, {
 
     lsp.setup()
 
+    require('lspconfig').rust_analyzer.setp({
+        assist = {
+                importEnforceGranularity = true,
+                importPrefix = 'crate',
+            },
+            cargo = {
+                allFeatures = true,
+            },
+            checkOnSave = {
+                command = 'clippy',
+            },
+            inlayHints = { locationLinks = false },
+            diagnostics = {
+                enable = true,
+                experimental = {
+                    enable = true,
+                },
+            },
+    });
+
     -- You need to setup `cmp` after lsp-zero
     local cmp = require('cmp')
     require('lsp-zero').cmp_action()
@@ -138,13 +158,6 @@ table.insert(plugins, {
       }
     })
   end,
-})
-
--- Rust
-table.insert(plugins, {
-  'mrcjkb/rustaceanvim',
-  version = '^3', -- Recommended
-  ft = { 'rust' },
 })
 ```
 

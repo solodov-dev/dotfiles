@@ -122,7 +122,7 @@ table.insert(plugins, {
 
     lsp.setup()
 
-    require('lspconfig').rust_analyzer.setp({
+    require('lspconfig').rust_analyzer.setup({
         assist = {
                 importEnforceGranularity = true,
                 importPrefix = 'crate',

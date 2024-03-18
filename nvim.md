@@ -224,7 +224,7 @@ table.insert(plugins, {
     require("lualine").setup {
       options = {
       -- ... your lualine config
-      theme = 'gruvbox'
+      theme = 'tokyonight'
       -- ... your lualine config
       }
     }

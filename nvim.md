@@ -250,7 +250,7 @@ table.insert(plugins, {
   },
   config = function()
     require("barbecue").setup {
-      theme = 'tokyonight',
+      theme = 'tokyonight-night',
     }
   end,
 })
@@ -489,7 +489,7 @@ Now we can load the plugins.
 
 ```lua
 require("lazy").setup(plugins)
-vim.cmd[[colorscheme gruvbox]]
+vim.cmd[[colorscheme tokyonight-night]]
 ```
 
 ```lua

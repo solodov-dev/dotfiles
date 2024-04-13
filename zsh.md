@@ -70,7 +70,7 @@ alias g=lazygit
 alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && git push origin master"
 alias gtree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gprune="git fetch --prune && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
-alias gstat="git -C status"
+alias gstat="git status"
 ```
 
 ## Functions
@@ -100,20 +100,6 @@ then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-```
-
-### GHCup env
-
-```sh
-[ -f "/home/andrey/.ghcup/env" ] && source "/home/andrey/.ghcup/env"
-```
-
-### Kitty SSH
-
-When kitty is used to ssh into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an ssh kitten to automate exactly this.
-
-```sh
-[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 ```
 
 ## Plugins

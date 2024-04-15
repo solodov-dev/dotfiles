@@ -371,7 +371,7 @@ table.insert(plugins, {
       S = { function() vim.cmd.edit('/tmp/scratch.md') end, "Scratchpad" },
       m = {
         name = "Markdown",
-        t = { "<cmd>ToggleCheckbox<cr>", "Toggle checkbox" }
+        t = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle preview" }
       }
     }, { prefix = "<leader>" })
   end,
@@ -483,14 +483,29 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 ```
 
-Custom terminals
+### Markdown
 
-Now we can load the plugins.
+Markdown preview
+
+```lua
+table.insert(plugins, {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+})
+```
+
+### Loading plugins
+
+Now we can load our plugins
 
 ```lua
 require("lazy").setup(plugins)
 vim.cmd[[colorscheme tokyonight-night]]
 ```
+
+## Custom terminals
 
 ```lua
 local Terminal  = require('toggleterm.terminal').Terminal
@@ -505,3 +520,4 @@ function _yarn_toggle()
   yarn:toggle()
 end
 ```
+

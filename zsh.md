@@ -54,13 +54,15 @@ fi
 ```sh
 alias vim=nvim
 alias v=nvim
-alias zsource="source ~/.zshrc"
-alias zconfig="cd ~/.dotfiles && vim zsh.md"
-alias vconfig="cd ~/.config/nvim && vim ."
-alias dotfiles="cd ~/.dotfiles && vim ."
+alias source-zsh="source ~/.zshrc"
+alias edit-zsh="cd ~/.dotfiles && vim zsh.md"
+alias edit-nvim="cd ~/.dotfiles && vim nvim.md"
+alias edit-dotfiles="cd ~/.dotfiles && vim ."
 alias off=poweroff
 alias tangle="~/.dotfiles/tangle"
 alias dot="cd ~/.dotfiles"
+alias down="cd ~/Downloads"
+alias doc="cd ~/Documents"
 alias g=lazygit
 ```
 
@@ -81,11 +83,6 @@ mkcd () {
   cd "$1"
 }
 
-
-takeout () {
-  mv $1/* .
-  rm -rf "$1"
-}
 ```
 
 ## Tools

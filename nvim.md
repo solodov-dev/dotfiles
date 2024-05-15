@@ -144,7 +144,7 @@ table.insert(plugins, {
 
     -- You need to setup `cmp` after lsp-zero
     local cmp = require('cmp')
-    require('lsp-zero').cmp_action()
+    local cmp_action = require('lsp-zero').cmp_action()
 
     cmp.setup({
       mapping = {
@@ -152,9 +152,12 @@ table.insert(plugins, {
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
         -- Ctrl+Space to trigger completion menu
         ['<C-Space>'] = cmp.mapping.complete(),
-        -- Navigate between snippet placeholder
+        -- Navigate between completion menu items
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
+        -- Navigate between snippet placeholders
+        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
       }
     })
   end,

@@ -25,7 +25,7 @@ This is where you actually apply your config choices
 ```lua
 config.color_scheme = 'Tokyo Night'
 config.hide_tab_bar_if_only_one_tab = true
-config.font = wezterm.font 'Fira Code Nerd Font'
+config.font = wezterm.font 'FiraCode Nerd Font'
 ```
 
 ## Keys

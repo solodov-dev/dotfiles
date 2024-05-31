@@ -108,7 +108,6 @@ table.insert(plugins, {
         'awk_ls',
         'bashls',
         'clangd',
-        'codelldb',
         'cssls',
         'cssmodules_ls',
         'docker_compose_language_service',

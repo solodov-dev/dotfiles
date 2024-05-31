@@ -105,22 +105,22 @@ table.insert(plugins, {
     require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
     lsp.ensure_installed({
-     'awk-language-server',
-     'bash-language-server',
-     'clangd',
-     'css-lsp',
-     'cssmodules-language-server',
-     'docker-compose-language-service',
-     'dockerfile-language-server',
-     'emmet-ls',
-     'eslint-lsp',
-     'json-lsp',
-     'lua-language-server',
-     'marksman',
-     'rust-analyzer',
-     'typescript-language-server',
-     'yaml-language-server',
-     'codelldb',
+        'awk_ls',
+        'bashls',
+        'clangd',
+        'codelldb',
+        'cssls',
+        'cssmodules_ls',
+        'docker_compose_language_service',
+        'dockerls',
+        'emmet_ls',
+        'eslint',
+        'jsonls',
+        'lua_ls',
+        'marksman',
+        'rust_analyzer',
+        'tsserver',
+        'yamlls',
     })
 
     lsp.setup()
@@ -174,6 +174,14 @@ Install DAP
 ```lua
 table.insert(plugins, {
   "mfussenegger/nvim-dap",
+})
+```
+
+Install nio
+
+```lua
+table.insert(plugins, {
+  "nvim-neotest/nvim-nio",
 })
 ```
 

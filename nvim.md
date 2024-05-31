@@ -56,8 +56,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 ```
 
-### List of plugins
-
 A table with all the plugins we are going to install.
 
 ```lua
@@ -107,18 +105,23 @@ table.insert(plugins, {
     require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
     lsp.ensure_installed({
-      'jsonls',
-      'marksman',
-      'dockerls',
-      'docker_compose_language_service',
-      'bashls',
-      'cssls',
-      'cssmodules_ls',
-      'emmet_ls',
-      'eslint',
-      'lua_ls',
-      'tsserver',
-      'yamlls' })
+     'awk-language-server',
+     'bash-language-server',
+     'clangd',
+     'css-lsp',
+     'cssmodules-language-server',
+     'docker-compose-language-service',
+     'dockerfile-language-server',
+     'emmet-ls',
+     'eslint-lsp',
+     'json-lsp',
+     'lua-language-server',
+     'marksman',
+     'rust-analyzer',
+     'typescript-language-server',
+     'yaml-language-server',
+     'codelldb',
+    })
 
     lsp.setup()
 
@@ -161,6 +164,56 @@ table.insert(plugins, {
       }
     })
   end,
+})
+```
+
+### Debugging
+
+Install DAP
+
+```lua
+table.insert(plugins, {
+  "mfussenegger/nvim-dap",
+})
+```
+
+Setup DAP
+
+```lua
+table.insert(plugins, {
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = {
+        "williamboman/mason.nvim",
+        "mfussenegger/nvim-dap",
+    },
+    opts = {
+        handlers = {}
+    },
+})
+```
+Setup DAP UI
+```lua
+table.insert(plugins, {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function ()
+        local dap, dapui = require("dap"), require("dapui")
+        dapui.setup()
+        dap.listeners.before.attach.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+        end
+    end
 })
 ```
 
@@ -375,7 +428,12 @@ table.insert(plugins, {
       m = {
         name = "Markdown",
         t = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle preview" }
-      }
+      },
+      b = {
+        name = "Debugger",
+        b = { "<cmd>DapToggleBreakpoint<cr>", "Add breakpoint" },
+        r = { "<cmd>DapContinue<cr>", "Start or continue debugger" },
+      },
     }, { prefix = "<leader>" })
   end,
 })

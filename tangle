@@ -1,7 +1,0 @@
-#!/usr/bin/awk -f
-
-BEGIN {printf "Tangling file %s\n", ARGV[1]}
-/tangle:/{sub(/~/,ENVIRON["HOME"],$2); output=$2}
-/```/{n+=1} 
-n%2==1 && ! /```/ {print $0 > output; nl++}
-END {printf "%i lines tangled to %s\n", nl, output}

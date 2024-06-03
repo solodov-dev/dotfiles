@@ -1,14 +1,7 @@
----
-title: Neovim config
-author: Andrey Solodov
-tangle: ~/.config/nvim/init.lua
----
+-- Settings
 
-## Settings
+-- Some global settings such as `<leader>` key, tabstops, etc.
 
-Some global settings such as `<leader>` key, tabstops, etc.
-
-```lua
 vim.g.mapleader = " "
 vim.g.netrw_preview = 1
 vim.opt.tabstop = 2
@@ -27,21 +20,17 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.opt.clipboard = "unnamedplus"
-```
 
-## Keymaps
+-- Keymaps
 
-```lua
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move line down
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move line up
-vim.keymap.set("n", "J", "mzJ`z") -- connect line without moving the coursor
-```
+vim.keymap.set("n", "J", "mzJ`z")            -- connect line without moving the coursor
 
-## Plugins
+-- Plugins
 
-Init lazy.nvim plugin manager.
+-- Init lazy.nvim plugin manager.
 
-```lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -54,19 +43,15 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-```
 
-A table with all the plugins we are going to install.
+-- A table with all the plugins we are going to install.
 
-```lua
 local plugins = {}
-```
 
-### Themes
+-- Themes
 
-Add some themes.
+-- Add some themes.
 
-```lua
 table.insert(plugins, {
   "folke/tokyonight.nvim",
   lazy = false,
@@ -77,13 +62,11 @@ table.insert(plugins, {
 table.insert(plugins, {
   "ellisonleao/gruvbox.nvim", priority = 1000
 })
-```
 
-### Lsp
+-- Lsp
 
-Setup language servers
+-- Setup language servers
 
-```lua
 table.insert(plugins, {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v2.x',
@@ -105,43 +88,43 @@ table.insert(plugins, {
     require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
     lsp.ensure_installed({
-        'awk_ls',
-        'bashls',
-        'clangd',
-        'cssls',
-        'cssmodules_ls',
-        'docker_compose_language_service',
-        'dockerls',
-        'emmet_ls',
-        'eslint',
-        'jsonls',
-        'lua_ls',
-        'marksman',
-        'rust_analyzer',
-        'tsserver',
-        'yamlls',
+      'awk_ls',
+      'bashls',
+      'clangd',
+      'cssls',
+      'cssmodules_ls',
+      'docker_compose_language_service',
+      'dockerls',
+      'emmet_ls',
+      'eslint',
+      'jsonls',
+      'lua_ls',
+      'marksman',
+      'rust_analyzer',
+      'tsserver',
+      'yamlls',
     })
 
     lsp.setup()
 
     require('lspconfig').rust_analyzer.setup({
-        assist = {
-                importEnforceGranularity = true,
-                importPrefix = 'crate',
-            },
-            cargo = {
-                allFeatures = true,
-            },
-            checkOnSave = {
-                command = 'clippy',
-            },
-            inlayHints = { locationLinks = false },
-            diagnostics = {
-                enable = true,
-                experimental = {
-                    enable = true,
-                },
-            },
+      assist = {
+        importEnforceGranularity = true,
+        importPrefix = 'crate',
+      },
+      cargo = {
+        allFeatures = true,
+      },
+      checkOnSave = {
+        command = 'clippy',
+      },
+      inlayHints = { locationLinks = false },
+      diagnostics = {
+        enable = true,
+        experimental = {
+          enable = true,
+        },
+      },
     });
 
     -- You need to setup `cmp` after lsp-zero
@@ -164,71 +147,68 @@ table.insert(plugins, {
     })
   end,
 })
-```
 
-### Debugging
+-- Debugging
 
-Install DAP
+-- Install DAP
 
-```lua
 table.insert(plugins, {
   "mfussenegger/nvim-dap",
 })
-```
 
-Install nio
+-- Install nio
 
-```lua
 table.insert(plugins, {
   "nvim-neotest/nvim-nio",
 })
-```
 
-Setup DAP
+-- Setup DAP
 
-```lua
 table.insert(plugins, {
-    "jay-babu/mason-nvim-dap.nvim",
-    event = "VeryLazy",
-    dependencies = {
-        "williamboman/mason.nvim",
-        "mfussenegger/nvim-dap",
-    },
-    opts = {
-        handlers = {}
-    },
+  "jay-babu/mason-nvim-dap.nvim",
+  event = "VeryLazy",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "mfussenegger/nvim-dap",
+  },
+  opts = {
+    handlers = {}
+  },
 })
-```
-Setup DAP UI
-```lua
+
+-- Setup DAP UI
+
 table.insert(plugins, {
-    "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
-    dependencies = "mfussenegger/nvim-dap",
-    config = function ()
-        local dap, dapui = require("dap"), require("dapui")
-        dapui.setup()
-        dap.listeners.before.attach.dapui_config = function()
-            dapui.open()
-        end
-        dap.listeners.before.launch.dapui_config = function()
-            dapui.open()
-        end
-        dap.listeners.before.event_terminated.dapui_config = function()
-            dapui.close()
-        end
-        dap.listeners.before.event_exited.dapui_config = function()
-            dapui.close()
-        end
+  "rcarriga/nvim-dap-ui",
+  event = "VeryLazy",
+  dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+  config = function()
+    local dap, dapui = require("dap"), require("dapui")
+
+    dapui.setup()
+
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
     end
+
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
+  end
 })
-```
 
-### NeoGit
+-- NeoGit
 
-Setup git integration.
+-- Setup git integration.
 
-```lua
 table.insert(plugins, {
   "NeogitOrg/neogit",
   dependencies = {
@@ -238,13 +218,11 @@ table.insert(plugins, {
   },
   config = true
 })
-```
 
-### Trouble
+-- Trouble
 
-List diagnostics in a nice quickfix list.
+-- List diagnostics in a nice quickfix list.
 
-```lua
 table.insert(plugins, {
   {
     "folke/trouble.nvim",
@@ -256,13 +234,11 @@ table.insert(plugins, {
     },
   },
 })
-```
 
-### Comment
+-- Comment
 
-Fast comments.
+-- Fast comments.
 
-```lua
 table.insert(plugins, {
   'numToStr/Comment.nvim',
   opts = {
@@ -270,36 +246,32 @@ table.insert(plugins, {
   },
   lazy = false,
 })
-```
 
-### Lualine
+-- Lualine
 
-Beautiful line.
+-- Beautiful line.
 
-```lua
 table.insert(plugins, {
   'nvim-lualine/lualine.nvim',
   name = "lualine",
   dependencies = {
-   'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
   },
-  config = function ()
+  config = function()
     require("lualine").setup {
       options = {
-      -- ... your lualine config
-      theme = 'tokyonight'
-      -- ... your lualine config
+        -- ... your lualine config
+        theme = 'tokyonight'
+        -- ... your lualine config
       }
     }
   end,
 })
-```
 
-### Barbecue
+-- Barbecue
 
-Show breadcrumbs at the top.
+-- Show breadcrumbs at the top.
 
-```lua
 table.insert(plugins, {
   "utilyre/barbecue.nvim",
   name = "barbecue",
@@ -317,64 +289,58 @@ table.insert(plugins, {
     }
   end,
 })
-```
 
-### Surround
+-- Surround
 
-Surround object.
+-- Surround object.
 
-```lua
 table.insert(plugins, {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
+  "kylechui/nvim-surround",
+  version = "*", -- Use for stability; omit to use `main` branch for the latest features
+  event = "VeryLazy",
+  config = function()
+    require("nvim-surround").setup({
+      -- Configuration here, or leave empty to use defaults
+    })
+  end
 })
-```
 
-### Format
+-- Format
 
-Formatter to work with different languages
+-- Formatter to work with different languages
 
-```lua
 table.insert(plugins, {
-    'stevearc/conform.nvim',
-     opts = {
-         formatters_by_ft = {
-            lua = { "stylua" },
-            -- Conform will run multiple formatters sequentially
-            python = { "isort", "black" },
-            -- Use a sub-list to run only the first available formatter
-            javascript = { { "prettierd", "prettier" } },
-            javascriptreact = { { "prettierd", "prettier" } },
-            typescript = { { "prettierd", "prettier" } },
-            typescriptreact = { { "prettierd", "prettier" } },
-            html = { { "prettierd", "prettier" } },
-            css = { { "prettierd", "prettier" } },
-            json = { { "prettierd", "prettier" } },
-            markdown = { { "prettierd", "prettier" } },
-            graphql = { { "prettierd", "prettier" } },
-            svelte = { { "prettierd", "prettier" } },
-            yaml = { { "prettierd", "prettier" } },
-          },
-        format_on_save = {
-            -- These options will be passed to conform.format()
-            timeout_ms = 500,
-            lsp_fallback = true,
-         },
+  'stevearc/conform.nvim',
+  opts = {
+    formatters_by_ft = {
+      lua = { "stylua" },
+      -- Conform will run multiple formatters sequentially
+      python = { "isort", "black" },
+      -- Use a sub-list to run only the first available formatter
+      javascript = { { "prettierd", "prettier" } },
+      javascriptreact = { { "prettierd", "prettier" } },
+      typescript = { { "prettierd", "prettier" } },
+      typescriptreact = { { "prettierd", "prettier" } },
+      html = { { "prettierd", "prettier" } },
+      css = { { "prettierd", "prettier" } },
+      json = { { "prettierd", "prettier" } },
+      markdown = { { "prettierd", "prettier" } },
+      graphql = { { "prettierd", "prettier" } },
+      svelte = { { "prettierd", "prettier" } },
+      yaml = { { "prettierd", "prettier" } },
     },
+    format_on_save = {
+      -- These options will be passed to conform.format()
+      timeout_ms = 500,
+      lsp_fallback = true,
+    },
+  },
 })
-```
 
-### Whichkey
+-- Whichkey
 
-Show hotkeys at the bottom in case you forgot.
+-- Show hotkeys at the bottom in case you forgot.
 
-```lua
 table.insert(plugins, {
   "folke/which-key.nvim",
   event = "VeryLazy",
@@ -409,7 +375,7 @@ table.insert(plugins, {
         a = { vim.lsp.buf.code_action, "Actions" },
         r = { vim.lsp.buf.references, "References" },
         R = { vim.lsp.buf.rename, "Rename" },
-        f = { function () require("conform").format({ async=true, lsp_fallback=true}) end, "Format" },
+        f = { function() require("conform").format({ async = true, lsp_fallback = true }) end, "Format" },
       },
       d = {
         name = "Diagnostics",
@@ -444,29 +410,30 @@ table.insert(plugins, {
     }, { prefix = "<leader>" })
   end,
 })
-```
 
-### Telescope
+-- Telescope
 
-Search files, buffers, strings and much more.
+-- Search files, buffers, strings and much more.
 
-```lua
 table.insert(plugins, {
   'nvim-telescope/telescope.nvim',
   tag = '0.1.2',
   dependencies = { 'nvim-lua/plenary.nvim', 'debugloop/telescope-undo.nvim' },
   config = function()
     local actions = require("telescope.actions")
-    local trouble = require("trouble.providers.telescope")
+    local trouble = require("trouble.sources.telescope")
     require('telescope').setup({
       extentions = { undo = {}, },
       defaults = {
         mappings = {
-          i = { ["<c-t>"] = trouble.open_with_trouble },
-          n = { ["<c-t>"] = trouble.open_with_trouble },
+          i = { ["<c-t>"] = trouble.open },
+          n = { ["<c-t>"] = trouble.open },
         }
       },
       pickers = {
+        find_files = {
+          hidden = true
+        },
         live_grep = {
           additional_args = function(opts)
             return { "--hidden" }
@@ -477,13 +444,11 @@ table.insert(plugins, {
     require("telescope").load_extension("undo")
   end,
 })
-```
 
-### Treesitter
+-- Treesitter
 
-Setup code hightlighting.
+-- Setup code hightlighting.
 
-```lua
 table.insert(plugins, {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
@@ -498,72 +463,40 @@ table.insert(plugins, {
     })
   end
 })
-```
 
-### Conflicts
+-- Conflicts
 
-Show and operate on git conflicts.
+-- Show and operate on git conflicts.
 
-```lua
 table.insert(plugins, {
- 'akinsho/git-conflict.nvim', version = "*", config = true
+  'akinsho/git-conflict.nvim', version = "*", config = true
 })
-```
 
-### Files
+-- Files
 
-Work with a directory as a buffer
+-- Work with a directory as a buffer
 
-```lua
 table.insert(plugins, {
   'stevearc/oil.nvim',
   opts = {},
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" },
 })
-```
 
-### Terminal
+-- Terminal
 
-Show and operate on git conflicts.
-
-```lua
 table.insert(plugins, {
   'akinsho/toggleterm.nvim',
   version = "*",
-  opts = {--[[ things you want to change go here]]}
+  opts = { --[[ things you want to change go here]] }
 })
-```
 
-### Navigation
+-- Navigation
 
-Navigate between panes in vim and tmux
+-- Setup keybindings for terminal mode
 
-```lua
-table.insert(plugins, {
-  "christoomey/vim-tmux-navigator",
-  cmd = {
-    "TmuxNavigateLeft",
-    "TmuxNavigateDown",
-    "TmuxNavigateUp",
-    "TmuxNavigateRight",
-    "TmuxNavigatePrevious",
-  },
-  keys = {
-    { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-    { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-    { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-    { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-  },
-})
-```
-
-Setup keybindings for terminal mode
-
-```lua
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
+  local opts = { buffer = 0 }
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
@@ -571,38 +504,33 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 end
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-```
 
-### Markdown
+-- Markdown
 
-Markdown preview
+-- Markdown preview
 
-```lua
 table.insert(plugins, {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+  "iamcco/markdown-preview.nvim",
+  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  ft = { "markdown" },
+  build = function() vim.fn["mkdp#util#install"]() end,
 })
-```
 
-### Loading plugins
+-- Loading plugins
 
-Now we can load our plugins
+-- Now we can load our plugins
 
-```lua
 require("lazy").setup(plugins)
-vim.cmd[[colorscheme tokyonight-night]]
-```
+vim.cmd [[colorscheme tokyonight-night]]
 
-## Custom terminals
+-- Custom terminals
 
-```lua
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-local yarn = Terminal:new({ cmd = "yarn start", hidden = true, direction = "float" })
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local yarn     = Terminal:new({ cmd = "yarn start", hidden = true, direction = "float" })
 
 function _lazygit_toggle()
   lazygit:toggle()
@@ -611,5 +539,3 @@ end
 function _yarn_toggle()
   yarn:toggle()
 end
-```
-

@@ -19,24 +19,27 @@ return {
       -- (Optional) Configure lua language server for neovim
       require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 
-      lsp.ensure_installed({
-        "awk_ls",
-        "bashls",
-        "clangd",
-        "cssls",
-        "cssmodules_ls",
-        "docker_compose_language_service",
-        "dockerls",
-        "emmet_ls",
-        "eslint",
-        "jsonls",
-        "lua_ls",
-        "marksman",
-        "rust_analyzer",
-        "tsserver",
-        "prettier",
-        "prettierd",
-        "yamlls",
+      require("mason").setup({});
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "awk_ls",
+          "bashls",
+          "clangd",
+          "cssls",
+          "cssmodules_ls",
+          "docker_compose_language_service",
+          "dockerls",
+          "emmet_ls",
+          "eslint",
+          "jsonls",
+          "lua_ls",
+          "marksman",
+          "rust_analyzer",
+          "tsserver",
+          "prettier",
+          "prettierd",
+          "yamlls",
+        }
       })
 
       lsp.setup()

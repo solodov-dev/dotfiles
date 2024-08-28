@@ -40,9 +40,8 @@ alias v=nvim
 alias source-zsh="source ~/.zshrc"
 alias off=poweroff
 alias dot="cd ~/.dotfiles"
-alias down="cd ~/Downloads"
+alias dwn="cd ~/Downloads"
 alias doc="cd ~/Documents"
-alias g=lazygit
 
 ## Git aliases
 
@@ -76,8 +75,7 @@ fi
 plugins=(git vi-mode)
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
-## Path
-
-path+="$(yarn global bin)"
-path+=/usr/local/go/bin/
-path+=$HOME/.cargo/bin/
+## Load local settings
+for FILE in ~/.zshconfig/*; do
+  source $FILE
+done

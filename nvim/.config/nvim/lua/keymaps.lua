@@ -26,71 +26,59 @@ return {
 		end,
 		opts = {},
 		config = function()
-			require("which-key").register({
-				f = {
-					name = "File",
-					f = { "<cmd>Telescope find_files<cr>", "Find File (all)" },
-					g = { "<cmd>Telescope git_files<cr>", "Git Files" },
-					r = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-					b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-					u = { "<cmd>Telescope undo<cr>", "Undo tree" },
-					h = { "<cmd>Telescope oldfiles<cr>", "History" },
-					o = { "<cmd>Oil<cr>", "Oil (edit files as buffer)" },
-					e = { vim.cmd.Ex, "File explorer" },
+			require("which-key").add({
+				{ "<leader>f", group = "File" },
+				{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File (all)" },
+				{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Git Files" },
+				{ "<leader>fr", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+				{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+				{ "<leader>fu", "<cmd>Telescope undo<cr>", desc = "Undo tree" },
+				{ "<leader>fh", "<cmd>Telescope oldfiles<cr>", desc = "History" },
+				{ "<leader>fo", "<cmd>Oil<cr>", desc = "Oil (edit files as buffer)" },
+				{ "<leader>fe", vim.cmd.Ex, desc = "File explorer" },
+				{ "<leader>g", group = "Git" },
+				{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Git" },
+				{ "<leader>gb", "<cmd>BlameToggle<cr>", desc = "Blame" },
+				{ "<leader>l", group = "LSP" },
+				{ "<leader>lI", "<cmd>Mason<cr>", desc = "Install" },
+				{ "<leader>ld", vim.lsp.buf.definition, desc = "Definiion" },
+				{ "<leader>li", vim.lsp.buf.implementation, desc = "Implementation" },
+				{ "<leader>lh", vim.lsp.buf.hover, desc = "Signature" },
+				{ "<leader>la", vim.lsp.buf.code_action, desc = "Actions" },
+				{ "<leader>lr", vim.lsp.buf.references, desc = "References" },
+				{ "<leader>lR", vim.lsp.buf.rename, desc = "Rename" },
+				{
+					"<leader>lf",
+					function()
+						require("conform").format({ async = true, lsp_fallback = true })
+					end,
+					desc = "Format",
 				},
-				g = {
-					name = "Git",
-					g = { "<cmd>Neogit<cr>", "Git" },
-					b = { "<cmd>BlameToggle<cr>", "Blame" },
-				},
-				l = {
-					name = "LSP",
-					I = { "<cmd>Mason<cr>", "Install" },
-					d = { vim.lsp.buf.definition, "Definiion" },
-					i = { vim.lsp.buf.implementation, "Implementation" },
-					h = { vim.lsp.buf.hover, "Signature" },
-					a = { vim.lsp.buf.code_action, "Actions" },
-					r = { vim.lsp.buf.references, "References" },
-					R = { vim.lsp.buf.rename, "Rename" },
-					f = {
-						function()
-							require("conform").format({ async = true, lsp_fallback = true })
-						end,
-						"Format",
-					},
-				},
-				d = {
-					name = "Diagnostics",
-					h = { vim.diagnostic.open_float, "Open highlighted" },
-					n = { vim.diagnostic.goto_next, "Next" },
-					p = { vim.diagnostic.goto_prev, "Previous" },
-					w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace" },
-					d = { "<cmd>Trouble document_diagnostics<cr>", "Document" },
-					q = { "<cmd>Trouble quickfix<cr>", "Quickfix" },
-					l = { "<cmd>Trouble loclist<cr>", "Loclist" },
-				},
-				t = {
-					name = "Terminal",
-					t = { "<cmd>ToggleTerm direction=float<cr>", "Toggle" },
-					v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-					h = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
-				},
-				v = {
+				{ "<leader>d", group = "Diagnostics" },
+				{ "<leader>dh", vim.diagnostic.open_float, desc = "Open highlighted" },
+				{ "<leader>dn", vim.diagnostic.goto_next, desc = "Next" },
+				{ "<leader>dp", vim.diagnostic.goto_prev, desc = "Previous" },
+				{ "<leader>dw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Workspace" },
+				{ "<leader>dd", "<cmd>Trouble document_diagnostics<cr>", desc = "Document" },
+				{ "<leader>dq", "<cmd>Trouble quickfix<cr>", desc = "Quickfix" },
+				{ "<leader>dl", "<cmd>Trouble loclist<cr>", desc = "Loclist" },
+				{ "<leader>t", group = "Terminal" },
+				{ "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", desc = "Toggle" },
+				{ "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical" },
+				{ "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal" },
+				{
+					"<leader>v",
 					function()
 						vim.cmd.edit("~/.config/nvim/init.lua")
 					end,
-					"Edit config",
+					desc = "Edit config",
 				},
-				m = {
-					name = "Markdown",
-					t = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle preview" },
-				},
-				b = {
-					name = "Debugger",
-					b = { "<cmd>DapToggleBreakpoint<cr>", "Add breakpoint" },
-					r = { "<cmd>DapContinue<cr>", "Start or continue debugger" },
-				},
-			}, { prefix = "<leader>" })
+				{ "<leader>m", group = "Markdown" },
+				{ "<leader>mt", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle preview" },
+				{ "<leader>b", group = "Debugger" },
+				{ "<leader>bb", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint" },
+				{ "<leader>br", "<cmd>DapContinue<cr>", desc = "Start or continue debugger" },
+			})
 		end,
 	},
 }

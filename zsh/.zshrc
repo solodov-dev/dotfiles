@@ -57,6 +57,11 @@ mkcd () {
   cd "$1"
 }
 
+tmx () {
+  DIR=$(basename "$PWD")
+  tmux new -s $DIR \; split-window -h \; split-window -v \; attach
+}
+
 
 ## Tools
 

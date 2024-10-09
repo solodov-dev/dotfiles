@@ -17,6 +17,7 @@ return {
 					"typescript",
 					"markdown",
 					"bash",
+					"tsx",
 				},
 				sync_install = false,
 				highlight = { enable = true },
@@ -25,4 +26,3 @@ return {
 		end,
 	},
 }
-

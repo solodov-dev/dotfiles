@@ -79,3 +79,5 @@ VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 for FILE in ~/.zshconfig/*; do
   source $FILE
 done
+
+[ -f "/Users/a.m.solodov/.ghcup/env" ] && . "/Users/a.m.solodov/.ghcup/env" # ghcup-env

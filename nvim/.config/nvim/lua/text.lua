@@ -6,21 +6,10 @@ return {
 		},
 		lazy = false,
 	},
-
 	{
-		"nvim-lualine/lualine.nvim",
-		name = "lualine",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		"windwp/nvim-ts-autotag",
 		config = function()
-			require("lualine").setup({
-				options = {
-					-- ... your lualine config
-					theme = "tokyonight",
-					-- ... your lualine config
-				},
-			})
+			require("nvim-ts-autotag").setup({})
 		end,
 	},
 	{

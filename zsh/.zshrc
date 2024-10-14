@@ -35,35 +35,34 @@ fi
 
 ## Aliases
 
+### Programs
 alias vim=nvim
 alias v=nvim
-alias source-zsh="source ~/.zshrc"
 alias off=poweroff
+
+### Navigation
+alias srcz="source ~/.zshrc"
 alias dot="cd ~/.dotfiles"
 alias dwn="cd ~/Downloads"
 alias doc="cd ~/Documents"
 
-## Git aliases
-
+### Git
 alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && git push origin master"
 alias gtree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gprune="git fetch --prune && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
 alias gstat="git status"
 
-## Functions
+### Tmux
+alias tm=tmux
+alias tmcd='tmux new -s $(basename $PWD)'
+alias tmls='tmux ls'
 
+
+## Functions
 mkcd () {
   mkdir "$1"
   cd "$1"
 }
-
-tmx () {
-  DIR=$(basename "$PWD")
-  tmux new -s $DIR \; split-window -h \; split-window -v \; attach
-}
-
-
-## Tools
 
 ## NVM
 

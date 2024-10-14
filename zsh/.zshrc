@@ -57,6 +57,13 @@ alias tm=tmux
 alias tmcd='tmux new -s $(basename $PWD)'
 alias tmls='tmux ls'
 
+TMUXIFIER_BIN=$HOME/.tmux/plugins/tmuxifier/bin 
+if [[ -d $TMUXIFIER_BIN ]]
+then
+  path+=$TMUXIFIER_BIN
+  eval "$(tmuxifier init -)"
+fi
+
 
 ## Functions
 mkcd () {

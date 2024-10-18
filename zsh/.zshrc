@@ -51,11 +51,15 @@ alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && g
 alias gtree="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gprune="git fetch --prune && git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
 alias gstat="git status"
+alias g=lazygit
 
 ### Tmux
-alias tm=tmux
-alias tmcd='tmux new -s $(basename $PWD)'
-alias tmls='tmux ls'
+alias t=tmux
+alias tcd='tmux new -s $(basename $PWD)'
+alias tls='tmux ls'
+alias tx='tmuxifier'
+alias txls='tmuxifier load-session'
+alias txes='tmuxifier edit-session'
 
 TMUXIFIER_BIN=$HOME/.tmux/plugins/tmuxifier/bin 
 if [[ -d $TMUXIFIER_BIN ]]

@@ -29,7 +29,6 @@ local plugins = merge_plugins(
   require("git"),
   require("keymaps"),
   require("lsp"),
-  require("terminal"),
   require("text"),
   require("themes"),
   require("treesitter"),

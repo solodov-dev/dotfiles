@@ -1,6 +1,7 @@
 -- Some global settings such as `<leader>` key, tabstops, etc.
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 vim.g.netrw_preview = 1
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2

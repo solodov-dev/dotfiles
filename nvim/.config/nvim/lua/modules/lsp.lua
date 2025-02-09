@@ -1,21 +1,11 @@
 return {
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
   {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
-    dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" },             -- Required
-      { "williamboman/mason.nvim" },           -- Optional
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },     -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" },     -- Required
-    },
+    "neovim/nvim-lspconfig",
     config = function()
-      local lsp = require("lsp-zero").preset({})
-
       require("mason").setup({})
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -35,36 +25,44 @@ return {
           "ts_ls",
           "yamlls",
         },
+        handlers = {
+          -- Default setup handler for all servers
+          function(server_name)
+            require("lspconfig")[server_name].setup({})
+          end,
+
+          -- Custom handlers for specific languages
+          rust_analyzer = function()
+            require("lspconfig").rust_analyzer.setup({
+              assist = {
+                importEnforceGranularity = true,
+                importPrefix = "crate",
+              },
+              cargo = {
+                allFeatures = true,
+              },
+              checkOnSave = {
+                command = "clippy",
+              },
+              diagnostics = {
+                enable = true,
+                experimental = {
+                  enable = true,
+                },
+              },
+            })
+          end
+        }
       })
 
-      lsp.setup()
+      local lspconfig_defaults = require('lspconfig').util.default_config
+      lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+        'force',
+        lspconfig_defaults.capabilities,
+        require('cmp_nvim_lsp').default_capabilities()
+      )
 
-      require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-
-      require("lspconfig").rust_analyzer.setup({
-        assist = {
-          importEnforceGranularity = true,
-          importPrefix = "crate",
-        },
-        cargo = {
-          allFeatures = true,
-        },
-        checkOnSave = {
-          command = "clippy",
-        },
-        diagnostics = {
-          enable = true,
-          experimental = {
-            enable = true,
-          },
-        },
-      })
-
-      -- Rust eslint --fix on save
-
-      -- You need to setup `cmp` after lsp-zero
       local cmp = require("cmp")
-      local cmp_action = require("lsp-zero").cmp_action()
 
       cmp.setup({
         mapping = {
@@ -76,11 +74,11 @@ return {
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           -- Navigate between snippet placeholders
-          ["<C-f>"] = cmp_action.luasnip_jump_forward(),
-          ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+          -- ["<C-f>"] = cmp_action.luasnip_jump_forward(),
+          -- ["<C-b>"] = cmp_action.luasnip_jump_backward(),
         },
       })
-    end,
+    end
   },
   {
     "stevearc/conform.nvim",

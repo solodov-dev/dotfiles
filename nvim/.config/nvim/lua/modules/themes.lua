@@ -8,7 +8,6 @@ return {
       vim.cmd([[colorscheme tokyonight-night]])
     end
   },
-
   {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,

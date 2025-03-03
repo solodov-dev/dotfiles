@@ -52,6 +52,13 @@ return {
 						})
 					end,
 
+					cssls = function()
+						local capabilities = vim.lsp.protocol.make_client_capabilities()
+						capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+						require("lspconfig").cssls.setup({ capabilities })
+					end,
+
 					lua_ls = function()
 						require("lspconfig").lua_ls.setup({
 							settings = {

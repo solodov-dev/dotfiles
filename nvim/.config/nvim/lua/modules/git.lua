@@ -19,4 +19,5 @@ return {
 			require("blame").setup()
 		end,
 	},
+	{ "sindrets/diffview.nvim" },
 }

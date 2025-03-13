@@ -10,7 +10,8 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-config.color_scheme = "dayfox"
+config.color_scheme_dirs = { "~/.dotfiles/wezterm/colors" }
+config.color_scheme = "Everforest Light (Medium)"
 config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font("FiraCode Nerd Font")
 

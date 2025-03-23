@@ -16,7 +16,7 @@ return {
           override = function(conf)
             conf.relative = 'editor'
             conf.anchor = 'SW'
-            conf.row = vim.api.nvim_win_get_height(0)
+            conf.row = vim.o.lines - 2
             return conf
           end
         },

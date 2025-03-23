@@ -11,10 +11,15 @@ return {
           show_hidden = true,
         },
         float = {
-          max_width = 0.25,
-          padding = 2,
-          border = 'rounded',
-        }
+          max_height = 0.3,
+          padding = 0,
+          override = function(conf)
+            conf.relative = 'editor'
+            conf.anchor = 'SW'
+            conf.row = vim.api.nvim_win_get_height(0)
+            return conf
+          end
+        },
       })
     end
   },

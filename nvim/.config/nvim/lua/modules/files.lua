@@ -4,6 +4,19 @@ return {
     opts = {},
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require('oil').setup({
+        watch_for_changes = true,
+        view_options = {
+          show_hidden = true,
+        },
+        float = {
+          max_width = 0.25,
+          padding = 2,
+          border = 'rounded',
+        }
+      })
+    end
   },
   {
     "nvim-tree/nvim-tree.lua",

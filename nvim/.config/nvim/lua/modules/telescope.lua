@@ -3,11 +3,16 @@ return {
   { 'nvim-telescope/telescope-ui-select.nvim' },
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.2",
     dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" },
     config = function()
       require("telescope").setup({
-        extentions = { undo = {}, },
+        extentions = {
+          undo = {},
+          fzf = {
+            override_generic_sorter = true,
+            override_file_sorter = true,
+          }
+        },
         defaults = require('telescope.themes').get_ivy(),
         pickers = {
           find_files = {

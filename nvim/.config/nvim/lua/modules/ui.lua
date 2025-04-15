@@ -31,12 +31,11 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		opts = function(_, opts)
-			-- Other blankline configuration here
-			return require("indent-rainbowline").make_opts(opts)
-		end,
-		dependencies = {
-			"TheGLander/indent-rainbowline.nvim",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {
+			scope = { show_start = false, show_end = false },
+			indent = { tab_char = "▏" },
 		},
 	},
 }

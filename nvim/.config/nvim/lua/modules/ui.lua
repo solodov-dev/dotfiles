@@ -37,4 +37,8 @@ return {
 			indent = { tab_char = "▏" },
 		},
 	},
+	{
+		"folke/zen-mode.nvim",
+		opts = {},
+	},
 }

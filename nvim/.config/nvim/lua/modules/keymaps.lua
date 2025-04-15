@@ -16,6 +16,8 @@ return {
 		opts = {},
 		config = function()
 			require("which-key").add({
+				{ "<leader>a", group = "Actions" },
+				{ "<leader>as", "<cmd>ISwap<cr>", desc = "Swap" },
 				{ "<leader>s", group = "Search" },
 				{
 					"<leader>sf",

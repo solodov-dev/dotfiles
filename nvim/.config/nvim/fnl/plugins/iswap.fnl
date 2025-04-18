@@ -1,0 +1,1 @@
+[:mizlan/iswap.nvim]

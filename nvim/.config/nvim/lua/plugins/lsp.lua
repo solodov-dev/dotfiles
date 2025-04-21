@@ -10,6 +10,6 @@ local function _1_()
     local server = lspconfig[server_name]
     return server.setup({capabilities})
   end
-  return mason_lsp.setup({ensure_installed = {"awk_ls", "bashls", "clangd", "cssls", "cssmodules_ls", "docker_compose_language_service", "dockerls", "emmet_ls", "eslint", "jsonls", "lua_ls", "marksman", "rust_analyzer", "ts_ls", "yamlls", "fennel_language_server"}, handlers = {_2_}})
+  return mason_lsp.setup({ensure_installed = {"awk_ls", "bashls", "clangd", "cssls", "cssmodules_ls", "docker_compose_language_service", "dockerls", "emmet_ls", "eslint", "jsonls", "lua_ls", "marksman", "rust_analyzer", "ts_ls", "yamlls", "clojure_lsp", "fennel_language_server"}, handlers = {_2_}})
 end
 return {{"williamboman/mason.nvim"}, {"williamboman/mason-lspconfig.nvim"}, {"neovim/nvim-lspconfig", config = _1_}}

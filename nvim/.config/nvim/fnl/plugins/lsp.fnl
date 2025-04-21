@@ -22,9 +22,11 @@
                                                    :rust_analyzer
                                                    :ts_ls
                                                    :yamlls
+                                                   :clojure_lsp
                                                    :fennel_language_server]
                                 :handlers [(fn [server_name]
                                              (let [capabilities (cmp_lsp.default_capabilities)
                                                    server (. lspconfig
                                                              server_name)]
                                                (server.setup [capabilities])))]})))}]
+

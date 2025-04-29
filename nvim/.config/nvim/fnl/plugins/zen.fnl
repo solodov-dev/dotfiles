@@ -1,1 +1,0 @@
-[:folke/zen-mode.nvim]

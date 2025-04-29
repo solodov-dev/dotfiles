@@ -1,1 +1,0 @@
-[:famiu/bufdelete.nvim]

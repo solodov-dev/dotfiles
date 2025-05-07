@@ -14,6 +14,7 @@ return {
 					"awk_ls",
 					"bashls",
 					"clangd",
+					"gopls",
 					"cssls",
 					"cssmodules_ls",
 					"docker_compose_language_service",

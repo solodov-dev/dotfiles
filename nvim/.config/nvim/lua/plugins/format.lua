@@ -6,7 +6,6 @@ return {
 			return conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					python = { "isort", "black" },
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 					typescriptreact = { "prettierd", "prettier", stop_after_first = true },
@@ -15,9 +14,8 @@ return {
 					json = { "prettierd", "prettier", stop_after_first = true },
 					markdown = { "prettierd", "prettier", stop_after_first = true },
 					graphql = { "prettierd", "prettier", stop_after_first = true },
-					svelte = { "prettierd", "prettier", stop_after_first = true },
 					rust = { "rustfmt", lsp_format = "fallback" },
-					fennel = { "fnlfmt" },
+					go = { "gopls" },
 				},
 				format_on_save = { timeout_ms = 2500, lsp_fallback = true },
 			})

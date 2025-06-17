@@ -4,6 +4,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local wk = require("which-key")
+			local utils = require("config.utils")
 			return wk.add({
 				{ "<leader>a", group = "Actions" },
 				{ "<leader>as", "<cmd>s<cr>", desc = "ISwap" },
@@ -34,7 +35,7 @@ return {
 				{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Git" },
 				{ "<leader>gb", "<cmd>BlameToggle<cr>", desc = "Blame" },
 				{ "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Status" },
-				{ "<leader>Quickfix list" },
+				{ "<leader>c", group = "Quickfix list" },
 				{ "<leader>ct", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix list (Trouble)" },
 				{ "<leader>co", "<cmd>copen<cr>", desc = "Open" },
 				{ "<leader>cc", "<cmd>cclose<cr>", desc = "Close" },
@@ -75,6 +76,8 @@ return {
 				{ "<leader>Bb", "<cmd>DapToggleBreakpoint<cr>", desc = "Breakpoint" },
 				{ "<leader>Bs", "<cmd>DapContinue<cr>", desc = "Start/Continue" },
 				{ "<leader>v", "<cmd>e ~/.config/nvim<cr>", desc = "Edit config" },
+				{ "<leader>u", group = "Utils" },
+				{ "<leader>uc", utils.copyFilepath, desc = "Copy filepath to clipboard" },
 			})
 		end,
 	},

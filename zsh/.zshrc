@@ -95,5 +95,4 @@ for FILE in ~/.zshconfig/*; do
   source $FILE
 done
 
-[ -f "/Users/a.m.solodov/.ghcup/env" ] && . "/Users/a.m.solodov/.ghcup/env" # ghcup-env
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

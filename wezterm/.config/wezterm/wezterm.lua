@@ -1,6 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 
 -- This table will hold the configuration.
 local config = {}
@@ -40,6 +41,11 @@ end)
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
+  {
+    key = ':',
+    mods = 'LEADER|SHIFT',
+    action = wezterm.action.ActivateCommandPalette,
+  },
   {
     key = "c",
     mods = "LEADER",
@@ -100,6 +106,48 @@ config.keys = {
     end),
   },
 }
+
+wezterm.on("augment-command-palette", function(window, pane)
+  local workspace_state = resurrect.workspace_state
+  return {
+    {
+      brief = "Window | Workspace: Switch Workspace",
+      icon = "md_briefcase_arrow_up_down",
+      action = workspace_switcher.switch_workspace(),
+    },
+    {
+      brief = "Window | Workspace: Rename Workspace",
+      icon = "md_briefcase_edit",
+      action = wezterm.action.PromptInputLine({
+        description = "Enter new name for workspace",
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+            resurrect.state_manager.save_state(workspace_state.get_workspace_state())
+          end
+        end),
+      }),
+    },
+  }
+end)
+
+-- loads the state whenever I create a new workspace
+wezterm.on("smart_workspace_switcher.workspace_switcher.created", function(window, path, label)
+  local workspace_state = resurrect.workspace_state
+
+  workspace_state.restore_workspace(resurrect.state_manager.load_state(label, "workspace"), {
+    window = window,
+    relative = true,
+    restore_text = true,
+    on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+  })
+end)
+
+-- Saves the state whenever I select a workspace
+wezterm.on("smart_workspace_switcher.workspace_switcher.selected", function(window, path, label)
+  local workspace_state = resurrect.workspace_state
+  resurrect.state_manager.save_state(workspace_state.get_workspace_state())
+end)
 
 for i = 1, 9 do
   table.insert(config.keys, {

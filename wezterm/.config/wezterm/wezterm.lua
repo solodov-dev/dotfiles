@@ -15,6 +15,12 @@ end
 -- config.color_scheme = "Everforest Light (Medium)"
 config.color_scheme = "Dracula"
 config.font = wezterm.font("FiraCode Nerd Font")
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
 -- Tab bar
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true

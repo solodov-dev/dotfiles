@@ -1,5 +1,11 @@
 return {
   {
+    "Mofiqul/dracula.nvim",
+    config = function()
+      return vim.cmd("colorscheme dracula")
+    end,
+  },
+  {
     "folke/tokyonight.nvim",
     -- config = function()
     --   return vim.cmd("colorscheme tokyonight-night")
@@ -7,8 +13,8 @@ return {
   },
   {
     "sainnhe/gruvbox-material",
-    config = function()
-      return vim.cmd("colorscheme gruvbox-material")
-    end,
+    -- config = function()
+    --   return vim.cmd("colorscheme gruvbox-material")
+    -- end,
   }
 }

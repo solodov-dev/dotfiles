@@ -8,6 +8,7 @@ alias zconf="vim $HOME/.config/zsh"
 alias zsource="source ~/.zshrc"
 
 # Navigation
+setopt autocd
 alias dot="$HOME/.dotfiles"
 alias dow="$HOME/Downloads"
 alias doc="$HOME/Documents"

@@ -111,7 +111,7 @@ prompt_purification_setup() {
     autoload -Uz add-zsh-hook
     add-zsh-hook precmd prompt_purity_precmd
 
-    ZSH_THEME_GIT_PROMPT_PREFIX=" %F{red}⌥%f:"
+    ZSH_THEME_GIT_PROMPT_PREFIX=" %B%F{blue}⋺%f%b "
     ZSH_THEME_GIT_PROMPT_DIRTY=""
     ZSH_THEME_GIT_PROMPT_CLEAN=""
 

@@ -9,8 +9,5 @@ export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 export HISTFILE="$HOME/.bash_history"   # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
+setopt HIST_SAVE_NO_DUPS                # Do not write a duplicate event to the history file.
 
-#PROMPT
-# ౷ / (҂◡_◡) ᕤ
-export PS1="(҂◡_◡)ᕤ "
-export RPS1=$(git branch --show-current)

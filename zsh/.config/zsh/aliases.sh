@@ -4,7 +4,7 @@ alias v=nvim
 alias off=poweroff
 
 # Zsh
-alias zconf="vim $HOME/.shell_config"
+alias zconf="vim $HOME/.config/zsh"
 alias zsource="source ~/.zshrc"
 
 # Navigation

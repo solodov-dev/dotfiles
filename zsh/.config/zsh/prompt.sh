@@ -102,7 +102,7 @@ prompt_git_info() {
 
 prompt_purity_precmd() {
     # Pass a line before each prompt
-    print -P ''
+    # print -P ''
 }
 
 prompt_purification_setup() {

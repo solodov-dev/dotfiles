@@ -15,7 +15,7 @@ return {
 				defaults = {
 					mappings = {
 						i = {
-							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+							["<C-f>"] = require("telescope.actions.layout").toggle_preview,
 						},
 					},
 					preview = {

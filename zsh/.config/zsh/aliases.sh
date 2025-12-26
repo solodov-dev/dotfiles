@@ -2,6 +2,7 @@
 alias vim=nvim
 alias v=nvim
 alias off=poweroff
+alias hib="systemctl hibernate"
 
 # Zsh
 alias zconf="vim $HOME/.config/zsh"

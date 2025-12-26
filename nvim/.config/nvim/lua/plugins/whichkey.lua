@@ -84,6 +84,12 @@ return {
 					desc = "Copy filepath to clipboard",
 				},
 				{ "<leader>us", "<cmd>ISwapWith<cr>", desc = "Swap arguments" },
+				{ "<leader>ul", group = "Logs" },
+				{ "<leader>ulv", "<cmd>Chainsaw variableLog<cr>", desc = "Log variable" },
+				{ "<leader>uls", "<cmd>Chainsaw stacktraceLog<cr>", desc = "Log stacktrace" },
+				{ "<leader>ulo", "<cmd>Chainsaw objectLog<cr>", desc = "Log object" },
+				{ "<leader>ulc", "<cmd>Chainsaw clearLog<cr>", desc = "Clear log" },
+				{ "<leader>ulr", "<cmd>Chainsaw removeLogs<cr>", desc = "Remove logs" },
 			})
 		end,
 	},

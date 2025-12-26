@@ -5,6 +5,7 @@ return {
 		config = function()
 			local oil = require("oil")
 			return oil.setup({
+				default_file_explorer = true,
 				watch_for_changes = true,
 				lsp_file_methods = { enabled = true, autosave_changes = true },
 				view_options = { show_hidden = true },

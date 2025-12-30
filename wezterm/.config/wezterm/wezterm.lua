@@ -12,9 +12,8 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
--- config.color_scheme_dirs = { "~/.dotfiles/wezterm/colors" }
--- config.color_scheme = "Everforest Light (Medium)"
-config.color_scheme = "Dracula (Official)"
+-- config.color_scheme = "Dracula (Official)"
+config.color_scheme = "Gruvbox Material (Gogh)"
 config.font = wezterm.font("FiraCode Nerd Font")
 config.window_padding = {
 	top = 0,

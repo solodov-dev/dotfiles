@@ -7,3 +7,5 @@
 	autocrlf = input
 [init]
 	defaultBranch = master
+[alias]
+	pushall = !git remote | xargs -L1 git push --all

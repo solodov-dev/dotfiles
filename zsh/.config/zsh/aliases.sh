@@ -14,7 +14,7 @@ alias dot="$HOME/.dotfiles"
 alias dow="$HOME/Downloads"
 alias doc="$HOME/Documents"
 alias cod="$HOME/code"
-alias cod="$HOME/bin"
+alias bin="$HOME/bin"
 
 # Git
 alias gupdate="git add . && git commit -m 'Update `date +"%d/%m/%Y %H:%M"`' && git push origin master"

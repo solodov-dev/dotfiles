@@ -24,6 +24,7 @@ return {
           "clojure",
           "dockerfile",
           "yaml",
+          "go",
         },
       })
     end,

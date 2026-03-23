@@ -13,7 +13,7 @@ end
 
 -- This is where you actually apply your config choices
 -- config.color_scheme = "Dracula (Official)"
-config.color_scheme = "Gruvbox Material (Gogh)"
+config.color_scheme = "GruvboxLight"
 config.font = wezterm.font("FiraCode Nerd Font")
 config.window_padding = {
   top = 0,
@@ -114,8 +114,8 @@ config.keys = {
     action = wezterm.action_callback(function(win, pane)
       resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
         local type = string.match(id, "^([^/]+)") -- match before '/'
-        id = string.match(id, "([^/]+)$")     -- match after '/'
-        id = string.match(id, "(.+)%..+$")    -- remove file extention
+        id = string.match(id, "([^/]+)$")         -- match after '/'
+        id = string.match(id, "(.+)%..+$")        -- remove file extention
         local opts = {
           relative = true,
           restore_text = true,

@@ -4,7 +4,7 @@ return {
   { "hrsh7th/cmp-path" },
   { "hrsh7th/cmp-cmdline" },
   { "saadparwaiz1/cmp_luasnip" },
-  { "L3MON4D3/LuaSnip",        dependencies = { "rafamadriz/friendly-snippets" } },
+  { "L3MON4D3/LuaSnip" },
   {
     "hrsh7th/nvim-cmp",
     dependencies = { "onsails/lspkind.nvim" },
@@ -13,7 +13,6 @@ return {
       local lspkind = require("lspkind")
       local lkind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })
       local luasnip = require("luasnip")
-      local friendly_snippets = require("luasnip.loaders.from_vscode")
 
       cmp.setup({
         snippet = {
@@ -81,7 +80,6 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
       })
-      return friendly_snippets.lazy_load()
     end,
   },
 }

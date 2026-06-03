@@ -3,3 +3,7 @@ mkcd () {
   mkdir "$1"
   cd "$1"
 }
+# Call cht.sh
+cht (){
+	curl "https://cheat.sh/$1"
+}

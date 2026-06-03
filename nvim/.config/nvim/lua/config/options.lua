@@ -1,6 +1,5 @@
 do
   local options = {
-    winborder = "rounded",
     tabstop = 2,
     shiftwidth = 2,
     expandtab = true,

@@ -11,7 +11,7 @@ return {
 		config = function()
 			local telescope = require("telescope")
 			telescope.setup({
-				extentions = { undo = {}, fzf = { override_generic_sorter = true, override_file_sorter = true } },
+				extensions = { undo = {}, fzf = { override_generic_sorter = true, override_file_sorter = true } },
 				defaults = {
 					mappings = {
 						i = {

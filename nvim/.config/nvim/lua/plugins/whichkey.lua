@@ -63,7 +63,7 @@ return {
 				{ "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
 				{
 					"<leader>lf",
-					"<cmd>lua require('conform').format(( async = true, lsp_fallback = true ))<cr>",
+					"<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>",
 					desc = "Format",
 				},
 				{ "<leader>d", group = "Diagnostics" },

@@ -23,7 +23,7 @@ return {
 				{ "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
 				{ "<leader>f", group = "Files" },
 				{ "<leader>fo", "<cmd>Oil<cr>", desc = "Oil" },
-				{ "<leader>fe", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Explorer" },
+
 				{ "<leader>t", group = "Tasks" },
 				{ "<leader>tt", "<cmd>OverseerToggle<cr>", desc = "Toggle tasks list" },
 				{ "<leader>tr", "<cmd>OverseerRun<cr>", desc = "Run task" },

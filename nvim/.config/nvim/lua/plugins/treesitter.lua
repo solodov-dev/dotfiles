@@ -22,6 +22,7 @@ return {
           "tsx",
           "c",
           "clojure",
+          "scheme",
           "dockerfile",
           "yaml",
           "go",

@@ -13,7 +13,8 @@ end
 
 -- This is where you actually apply your config choices
 -- config.color_scheme = "Dracula (Official)"
-config.color_scheme = "GruvboxLight"
+-- config.color_scheme = "GruvboxLight"
+config.color_scheme = "Tokyo Night"
 config.font = wezterm.font("FiraCode Nerd Font")
 config.window_padding = {
   top = 0,

@@ -15,7 +15,7 @@ do
     colorcolumn = "80",
     clipboard = "unnamedplus",
     wrap = false,
-    background = "light",
+    background = "dark",
   }
 
   for option, value in pairs(options) do

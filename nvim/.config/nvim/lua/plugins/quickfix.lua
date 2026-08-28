@@ -1,0 +1,13 @@
+return {
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+    dependencies = { "junegunn/fzf" }
+  },
+  {
+    "junegunn/fzf",
+    build = function()
+      vim.fn['fzf#install']()
+    end
+  }
+}

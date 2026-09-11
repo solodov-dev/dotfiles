@@ -16,6 +16,7 @@ do
     clipboard = "unnamedplus",
     wrap = false,
     background = "dark",
+    cursorline = true,
   }
 
   for option, value in pairs(options) do

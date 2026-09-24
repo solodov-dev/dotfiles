@@ -15,7 +15,7 @@ end
 -- config.color_scheme = "Dracula (Official)"
 -- config.color_scheme = "GruvboxLight"
 config.color_scheme = "Tokyo Night"
-config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font("Maple Mono NF CN")
 config.window_padding = {
   top = 0,
   bottom = 0,
@@ -97,8 +97,8 @@ config.keys = {
     action = wezterm.action.ActivateTabRelative(-1),
   },
   {
-    key = "n",
-    mods = "SHIFT|CTRL",
+    key = "f",
+    mods = "LEADER",
     action = wezterm.action.ToggleFullScreen,
   },
   {

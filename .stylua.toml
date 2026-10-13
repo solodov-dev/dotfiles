@@ -1,0 +1,13 @@
+# StyLua config for this repo.
+#
+# conform.nvim runs StyLua on stdin, and StyLua searches upward from the file
+# being formatted, so this single root config covers nvim/.config/nvim/**/*.lua.
+#
+# column_width is 120 (StyLua's default) to match the existing code, which
+# already has lines well past 80. Lower it to 80 if you'd rather respect the
+# colorcolumn set in config/options.lua -- expect a large one-time diff.
+indent_type = "Spaces"
+indent_width = 2
+column_width = 120
+quote_style = "AutoPreferDouble"
+call_parentheses = "Always"

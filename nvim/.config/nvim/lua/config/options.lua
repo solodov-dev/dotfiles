@@ -15,8 +15,16 @@ do
     colorcolumn = "80",
     clipboard = "unnamedplus",
     wrap = false,
-    background = "dark",
+    background = "light",
     cursorline = true,
+    winborder = "rounded",
+    fillchars = "eob: ,vert:│,fold:·,diff:╱",
+    listchars = "tab:» ,trail:·,nbsp:␣,extends:›,precedes:‹",
+    smoothscroll = true,
+    pumheight = 12,
+    splitright = true,
+    splitbelow = true,
+    laststatus = 3,
   }
 
   for option, value in pairs(options) do

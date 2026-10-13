@@ -28,7 +28,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.close(),
           ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
+          ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -36,8 +36,8 @@ return {
             else
               fallback()
             end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -45,7 +45,7 @@ return {
             else
               fallback()
             end
-          end, { 'i', 's' }),
+          end, { "i", "s" }),
         },
         window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
         formatting = {
@@ -66,9 +66,7 @@ return {
             option = { use_show_condition = true },
             entry_filter = function()
               local context = require("cmp.config.context")
-              return (
-                not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
-              )
+              return (not context.in_treesitter_capture("string") and not context.in_syntax_group("String"))
             end,
           },
           { name = "buffer" },

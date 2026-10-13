@@ -7,7 +7,7 @@ return {
   },
   opts = {
     show_icons = true,
-    leader_key = "`",        -- Recommended to be a single keyarro
+    leader_key = "`", -- Recommended to be a single keyarro
     buffer_leader_key = "m", -- Per Buffer Mappings
   },
 }

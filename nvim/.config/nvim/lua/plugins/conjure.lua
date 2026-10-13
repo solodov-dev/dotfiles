@@ -17,5 +17,5 @@ return {
     -- connect over a Unix socket at this absolute path. Guile's --listen
     -- refuses to start if the socket file already exists, so rm -f before launch.
     vim.g["conjure#client#guile#socket#pipename"] = "/tmp/.guile-repl.socket"
-  end
+  end,
 }

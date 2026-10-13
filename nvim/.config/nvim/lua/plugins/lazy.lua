@@ -1,6 +1,6 @@
 return {
   {
     "folke/lazy.nvim",
-    version = "*"
+    version = "*",
   },
 }
